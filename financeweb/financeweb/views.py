@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import Context, RequestContext
 from app1.models import user
-
+from django.contrib.auth import logout
 def home(request):
 	return render_to_response('home.html', {}, context_instance=RequestContext(request))
 
@@ -27,3 +27,11 @@ def abc(request):
 		u.save()
 
 	return render_to_response('signup.html', {}, context_instance=RequestContext(request))
+
+def logout (request) : 
+	logout (request)
+	try : 
+		del request.session[u.email]
+	except keyError:
+		pass 
+		return HttpResponse("you are logged out")
