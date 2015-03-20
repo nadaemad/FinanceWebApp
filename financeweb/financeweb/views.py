@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import Context, RequestContext
-from app1.models import user
+from app1.models import *
 
 def home(request):
 	return render_to_response('home.html', {}, context_instance=RequestContext(request))
@@ -25,5 +25,104 @@ def abc(request):
 
 		u = user(user_email=email, user_name=username, first_name=firstname, Last_name=lastname, password=password, confirm_password=confirmpassword, company_name=companyname, company_date_of_origin=dateoforigin)
 		u.save()
+		return render_to_response('homepage2.html', {}, context_instance=RequestContext(request))
 
-	return render_to_response('signup.html', {}, context_instance=RequestContext(request))
+	else:
+		return render_to_response('signup.html', {}, context_instance=RequestContext(request))
+
+
+
+def newproject(request):
+	return render_to_response('newproject.html', {}, context_instance=RequestContext(request))
+
+def viewproject(request, post_id):
+	p = Project.objects.get(id=post_id)
+	exp = Project.objects.get(id=post_id).exp.all()
+
+	return render_to_response('viewproject.html', {'p':p, 'e':exp}, context_instance=RequestContext(request))
+
+
+def updateproject(request, post_id):
+	p = Project.objects.get(id=post_id)
+	gp = Project.objects.get(id=post_id).prof
+	exp = Project.objects.get(id=post_id).exp.all()
+
+	if request.POST:
+		nname = request.POST['newname']
+		p.pname = nname;
+		p.save()
+
+		nprof = request.POST['newprofit']
+		gp.pamount = nprof;
+		gp.save()
+
+
+		for e in exp:
+			name = request.POST['exp_name[%d]'%e.id]
+			amount = request.POST['exp_amount[%d]'%e.id]
+			e.ename = name
+			e.eamount = amount
+			e.save()
+
+		#part of adding expenses men awel wegdeed#
+		enames = []
+		eamounts = []
+		done = False
+		i=0
+		while(not done):
+			try:
+				enames.append(request.POST['ename[%d]'%i])
+				eamounts.append(request.POST['eamount[%d]'%i])
+				i+=1
+			except:
+				done=True
+
+		j=0;
+		while(j<i):
+			e = Expense(ename = enames[j], eamount = eamounts[j])
+			e.save()
+			p.exp.add(e)
+			j+=1
+
+		p.save()
+
+		return render_to_response('viewproject.html', {'p':p, 'e':exp}, context_instance=RequestContext(request))
+
+	else:
+		return render_to_response('updateproject.html', {'p':p, 'e':exp}, context_instance=RequestContext(request))
+
+
+def myprojects(request):
+
+	if request.POST:
+		pname = request.POST['pname']
+		pamount = request.POST['pamount']
+		enames = []
+		eamounts = []
+		done = False
+		i=0
+		while(not done):
+			try:
+				enames.append(request.POST['ename[%d]'%i])
+				eamounts.append(request.POST['eamount[%d]'%i])
+				i+=1
+			except:
+				done=True
+		print 'enames', enames
+		print 'eamounts', eamounts
+
+		gp = Gprofit(pamount = pamount)
+		gp.save()
+		p = Project(pname=pname, prof=gp)
+		p.save()
+		j=0;
+		while(j<i):
+			e = Expense(ename = enames[j], eamount = eamounts[j])
+			e.save()
+			p.exp.add(e)
+			j+=1
+
+		p.save()
+		print Project.objects.all()
+	return render_to_response('myprojects.html', {'projects':Project.objects.all()}, context_instance=RequestContext(request))
+	

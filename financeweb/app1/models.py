@@ -18,3 +18,25 @@ class user(models.Model):
 
 
 
+class Expense(models.Model):
+	ename = models.CharField(max_length=50)
+	eamount = models.IntegerField(max_length=20, blank=False)
+	def __unicode__(self):
+		return unicode(self.ename)
+
+
+class Gprofit(models.Model):
+	pamount = models.IntegerField(max_length=20, blank=False)
+	def __unicode__(self):
+		return unicode(self.pamount)
+
+
+class Project(models.Model):
+	pname = models.CharField(max_length=30)
+	exp = models.ManyToManyField(Expense)
+	prof = models.ForeignKey(Gprofit)
+	def __unicode__(self):
+		return unicode(self.pname)
+
+
+

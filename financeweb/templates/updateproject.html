@@ -1,0 +1,151 @@
+{% load staticfiles %}
+<script src='{% static "app1/jquery.js" %}'> </script>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+
+<title>Project {{ p.pname }}</title>
+
+
+<style>
+
+	body{	
+    	background-size: 100%;
+    	background-position: fixed;
+    	background-color: #CD5C5C;
+	}
+
+	p{
+		font-size: 20px;
+		margin-left: 550px;
+	}
+
+	button.projb{
+		margin-left: 540px;
+	}
+
+	h1{
+		font-style: oblique;
+		margin-left: 550px;
+	}
+
+	.labels{
+		font-style: italic;
+	}
+
+	h3{
+		font-style: italic;
+	}
+
+	.home{
+		font-style: italic;
+		margin-left: 580px;	
+	}
+
+	hr{
+		background-color: black; height: 1px; border: 0; 
+	}
+
+	.save{
+		margin-left: 570px;
+	}
+
+	p.title{
+		font-size: 65px;
+		margin-left: 320px;
+		font-style: oblique;
+	}
+
+</style>
+
+
+<body>
+
+	<p class="title">Finance Web Application</p>
+	<hr>
+
+	<form method='post' action="{% url 'updateproject' p.id %}">{% csrf_token %}
+
+	
+	<h1>{{ p.pname }} project</h1> 
+
+	<a class="home" href='/home'> Home Page</a>
+
+	<h3>Name</h3>
+
+		<label class="labels">Project Name</label>
+		<input type='text' value='{{ p.pname }}' name='newname'/>
+
+	<br></br>
+
+	<h3>Gross Profit</h3>
+		<label class="labels">Project Profit $</label>
+		<input type='text' value='{{ p.prof }}' name='newprofit'/>
+	<br></br>
+	
+
+	<h3>Expenses</h3>
+	{% for x in e%}
+		<label class="labels">Expense Name </label> 
+		<input type='text' value='{{ x.ename }}' name='exp_name[{{x.id}}]'/>
+		<br>
+
+		<label class="labels">Expense Amount $</label> 
+		<input type='text' value='{{ x.eamount }}' name='exp_amount[{{x.id}}]'/>
+		<br></br>
+	
+	{% endfor %}
+
+	<br>
+
+
+	<button type='button' id="b1" onclick="addexpense()">Add a New Expense</button><br></br>
+	<div id="hi"></div><br>
+
+	<hr>
+
+
+	<input type='submit' class="save" value="Save Project"> 
+
+	</form>
+
+
+
+	<script>
+
+	var index = 0;
+	function addexpense() {
+
+		var label1 = document.createElement("label");
+		var ltext1 = document.createTextNode("Expense Name:");
+		
+		label1.appendChild(ltext1);
+
+		var textbox1 = document.createElement("input");
+		textbox1.name = "ename["+(index)+"]";
+
+		var label2 = document.createElement("label");
+		var ltext2 = document.createTextNode("Amount:");
+		label2.appendChild(ltext2);
+
+		var textbox2 = document.createElement("input");
+		textbox2.name = "eamount["+(index)+"]";
+
+		var line = document.createElement("br")
+
+		var element = document.getElementById("hi");
+
+		index++;
+
+		element.appendChild(label1);
+		element.appendChild(textbox1);
+		element.appendChild(label2);
+		element.appendChild(textbox2);
+		element.appendChild(line);		
+	}
+
+	</script>
+
+
+</body>
+
+</html>
