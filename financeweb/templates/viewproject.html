@@ -1,0 +1,79 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+
+<title>Project {{ p.pname }}</title>
+
+
+<style>
+
+	body{	
+    	background-size: 100%;
+    	background-position: fixed;
+    	background-color: #CD5C5C;
+	}
+
+	h1{
+		margin-left: 500px;
+		font-style: oblique;
+	}
+
+	hr{
+		background-color: black; height: 1px; border: 0; 
+	}
+
+	.home{
+		font-style: italic;
+		margin-left: 580px;	
+	}
+
+	.update{
+		font-style: italic;
+		margin-left: 560px;
+	}
+
+	h3{
+		font-style: italic;
+	}
+
+	p.title{
+		font-size: 65px;
+		margin-left: 320px;
+		font-style: oblique;
+	}
+
+</style>
+
+
+<body>
+
+	<p class="title">Finance Web Application</p>
+	<hr>
+
+	<h1>Project Name: {{ p.pname }}</h1> 
+	<a class="home" href='/home'> Home Page</a>
+
+	<br>
+
+	<h3>Gross Profit</h3>
+	<label>${{ p.prof }}</label>
+	<br></br>
+	
+	<h3>Expenses</h3>
+
+	{% for x in e%}
+		<label>Expense Name: {{ x.ename }} </label> 
+		<br>
+		<label>Expense Amount: ${{ x.eamount }} </label> 
+		<br></br>
+	{% endfor %}
+
+	<br>
+
+	<a class="update" href="/updateproject/{{ p.id }}">Update Project</a>
+	<hr>
+
+
+</body>
+
+</html>

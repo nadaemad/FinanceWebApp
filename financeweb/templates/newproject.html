@@ -1,0 +1,127 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+
+<title>New Project</title>
+
+<style>
+
+	body{	
+    	background-size: 100%;
+    	background-position: fixed;
+    	background-color: #CD5C5C;
+		}
+
+	.submit{
+
+		font-size: 20px;
+		margin-left: 570px;
+
+	}
+
+	h1{
+		margin-left: 450px;
+		font-style: oblique;
+	}
+
+	hr{
+		background-color: black; height: 1px; border: 0; 
+	}
+
+	.home{
+		font-style: italic;
+		margin-left: 580px;	
+	}
+
+	p{
+		margin-left: 500px;
+	}
+
+	p.note{
+		margin-left: 150px;
+	}
+
+	p.title{
+		font-size: 65px;
+		margin-left: 320px;
+		font-style: oblique;
+	}
+
+</style>
+
+<body>
+
+	<p class="title">Finance Web Application</p>
+	<hr>
+
+	<h1>Creating a New Project</h1>
+
+	<br>
+
+	<p class="note"> Kindly be noted that this website is currently dealing with money in terms of US dollar. If you need a calculator for conversion, <a href="https://www.google.com.eg/#q=converter+from+us+dollar" >click here</a>.</p>
+
+	<p>**Please do not leave any blanks**</p>
+
+
+	<a class="home" href='/home'> Home Page</a>
+
+	<br></br>
+
+	<form method='post' action="{% url 'myprojects' %}">{% csrf_token %}
+
+		<label>Project Name: </label> 
+		<input type="text" name="pname" placeholder="Enter a project name">*<br><br>
+
+		<label>Gross Profit Amount: </label> 
+		<input type="number" name="pamount" placeholder="Enter your gross profit">*<br><br>
+
+		<button type='button' id="b1" onclick="myFunction()">Click here to add your expenses</button><br>
+		
+		<div id="hi"></div><br>
+
+		<hr>
+		
+		<input type='submit' class="submit" value="Submit Project"> 
+
+	</form>
+
+
+
+<script>
+	var index = 0;
+	function myFunction() {
+
+		var label1 = document.createElement("label");
+		var ltext1 = document.createTextNode("Expense Name:");
+		
+		label1.appendChild(ltext1);
+
+		var textbox1 = document.createElement("input");
+		textbox1.name = "ename["+(index)+"]";
+
+		var label2 = document.createElement("label");
+		var ltext2 = document.createTextNode("Amount:");
+		label2.appendChild(ltext2);
+
+		var textbox2 = document.createElement("input");
+		textbox2.name = "eamount["+(index)+"]";
+
+		var line = document.createElement("br")
+
+		var element = document.getElementById("hi");
+
+		index++;
+
+		element.appendChild(label1);
+		element.appendChild(textbox1);
+		element.appendChild(label2);
+		element.appendChild(textbox2);
+		element.appendChild(line);
+		
+		
+	}
+	</script>
+
+</body>
+
+</html>
