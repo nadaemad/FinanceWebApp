@@ -14,6 +14,9 @@ def login_user(request):
     context = RequestContext(request)
     #language = 'en-gb'
     #session_language = 'en-gb'
+
+    #Here the user log ins and starts authentication w hawelt a3mel session w ma3rafsh keda sahh wala la2
+
     state = "Please login below..."
     username = password = ''
     if request.POST:
