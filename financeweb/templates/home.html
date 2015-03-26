@@ -167,21 +167,40 @@ display: block;
 
 <body>
 
-<h1>Finance Web Application</h1>
+{% if user.is_authenticated %}
 
-<h2>hello start ups</h2>
+<h1> Welcome to Finance Web Application, {{ user.username }}!</h1>
+
+{% else %}
+
+<h1> Welcome to Finance Web Application: Log in or create an account </h1>
+<h2>Hello Start-ups</h2>
+
+{% endif %}
+
+
 <div class="first">
  <a href="signup" class="button">Sign Up</a>
  <br></br>
- <a href="" class="button">OurFeatures</a>
+ <a href="signin" class="button">Sign In</a>
  <br></br>
- <a href="" class="button1">OurApp</a>
+ <a href="" class="button">Our Features</a>
  <br></br>
-  <a href="" class="button2">MyProjects</a>
+ <a href="" class="button">Our App</a>
+ <br></br>
+  <a href="myprojects" class="button">My Projects</a>
   <br></br>
   <link href="hello.css" rel="stylesheet">
    
 </div>
+
+<br></br>
+<br></br>
+
+<div class="video-container">
+<iframe src="http://player.vimeo.com/video/6284199?title=0&byline=0&portrait=0" width="800" height="450" frameborder="0"></iframe>
+</div>
+
 
 <h3>
 <iframe src="http://embed.wistia.com/deliveries/a772b411b0d54939a4e8e906251d7b4838b19e63/file.mp4" width="500" height="450" frameborder="0"></iframe>
