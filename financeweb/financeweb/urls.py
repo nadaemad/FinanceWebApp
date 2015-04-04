@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from financeweb.views import home, abc, home2, viewproject, updateproject, myprojects, newproject
+from financeweb.views import home, abc, home2, login_user
+
 
 urlpatterns = patterns('',
     # Examples:
@@ -18,5 +20,8 @@ urlpatterns = patterns('',
     url(r'^viewproject/home$', home, name='home'),
     url(r'^viewproject/myprojects$', myprojects, name='myprojects'),
     url(r'^viewproject/viewproject/(?P<post_id>\d+)$', viewproject, name='viewproject'),
+
+
+	url(r'^signin', login_user, name='signin'),
 
 )
