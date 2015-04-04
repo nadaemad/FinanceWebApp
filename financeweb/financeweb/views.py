@@ -6,6 +6,23 @@ from app1.models import *
 
 from django.contrib.auth import authenticate, login
 
+from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, render_to_response, RequestContext
+from django.template import Context
+from app1.models import user
+
+def home3(request, u_id):
+	u = user.objects.get(id=u_id)
+	return render_to_response('homepage3.html', {'u': u}, context_instance=RequestContext(request))
+
+def editprofile(request, u_id):
+	u = user.objects.get(id=u_id)
+	return render_to_response('editprofile.html', {'u': u}, context_instance=RequestContext(request))   
+
+def myaccount(request, u_id):
+	u = user.objects.get(id=u_id)
+	return render_to_response('myaccount.html', {'u': u}, context_instance=RequestContext(request))   
 
 def home(request):
 	return render_to_response('home.html', {}, context_instance=RequestContext(request))
@@ -48,7 +65,6 @@ def abc(request):
 
 	if request.POST:
 		email = request.POST['email']
-		username = request.POST['username']
 		firstname = request.POST['fn']
 		lastname = request.POST['ln']
 		password = request.POST['pass']
@@ -56,7 +72,7 @@ def abc(request):
 		companyname = request.POST['cname']
 		dateoforigin = request.POST['date']
 
-		u = user(user_email=email, user_name=username, first_name=firstname, Last_name=lastname, password=password, confirm_password=confirmpassword, company_name=companyname, company_date_of_origin=dateoforigin)
+		u = user(user_email=email, first_name=firstname, Last_name=lastname, password=password, confirm_password=confirmpassword, company_name=companyname, company_date_of_origin=dateoforigin)
 		u.save()
 		return render_to_response('homepage2.html', {}, context_instance=RequestContext(request))
 
@@ -158,4 +174,8 @@ def myprojects(request):
 		p.save()
 		print Project.objects.all()
 	return render_to_response('myprojects.html', {'projects':Project.objects.all()}, context_instance=RequestContext(request))
-	
+
+
+def signup(request):
+
+	return render_to_response('signup.html', {}, context_instance=RequestContext(request))

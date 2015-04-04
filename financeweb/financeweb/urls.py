@@ -3,6 +3,7 @@ from django.contrib import admin
 from financeweb.views import home, abc, home2, viewproject, updateproject, myprojects, newproject
 from financeweb.views import home, abc, home2, login_user
 
+from financeweb.views import home, home2, myaccount, signup, home3, editprofile
 
 urlpatterns = patterns('',
     # Examples:
@@ -23,5 +24,11 @@ urlpatterns = patterns('',
 
 
 	url(r'^signin', login_user, name='signin'),
+    url(r'^homepage$', home, name='home'),
+    url(r'^homepage2$', home2, name='home2'),
+    url(r'^homepage3/(?P<u_id>\d+)$', home3, name='home3'),
+	url(r'^signup$', signup, name='signup'),
+	url(r'^myaccount/(?P<u_id>\d+)$', myaccount, name='myaccount'),
+	url(r'^editprofile/(?P<u_id>\d+)$', editprofile, name='editprofile'),
 
 )
