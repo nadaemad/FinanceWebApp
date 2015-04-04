@@ -1,165 +1,72 @@
+
 <!DOCTYPE html>
 <head>
 <script src="/assets/jquery.js"></script>
-<link href='https://fonts.googleapis.com/css?family=Londrina+Shadow' rel='stylesheet' type='text/css'>
+<link href="http://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Merienda+One" rel="stylesheet" type="text/css">
 <style>
+
 body {
   font-family: helvetica, sans-serif;
-  margin: 0 auto;
-  max-width: 600px;
-  background: white;
-}
-div {
-  height: 200px;
-  background-size: cover;
-  position: relative;
-  margin: 40px 0 0 0;
-  border-radius: 12px;
-}
-h1 {
-  font-family: 'Londrina Shadow', cursive;
-  text-align: center;
-  font-size: 75px;
-  color: black;
-  margin: 60px 0 0 0;
-}
-h2 {
-  text-align: center;
-  color: #bbbbbb;
-  margin: 0px 0 70px 0;
-}
+  background-color: #FFC0CB;
 
-h3 {
-  position: absolute;
-  left: 50px;
-  top: 850px;
-  
-}
-
-h4{
-  position: absolute;
-  left: 575px;
-  top: 848px;
-}
-p {
-  color: rgba(255,255,255,1);
-  background: black;
-  background: linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
-  background: -webkit-linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
-  background: -moz-linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
-  padding: 10px;
-  line-height: 28px;
-  text-align: justify;
-  position: absolute;
-  bottom: 0;
-  margin: 0;
-  height: 30px;
-  transition: height .5s;
-  -webkit-transition: height .5s;
-  -moz-transition: height .5s;
-}
-
-small {
-  opacity: 0;
 }
 
 
-@media (max-width: 500px) {
-  h1 {
-    font-size: 50px;
-    margin-top: 20px;
-    line-height: 40px;
-  }
-  h2 {
-    font-size: 20px;
-    margin: 20px 0 30px 0;
-  }
-  div {
-    margin: 20px 12px 0 12px;
-  }
-  p {
-    font-size: 60px;
-    line-height: 50px;
-  }
-  small {
-    font-size: 16px;
-  }
- 
+h1{
+    font: 100 80px/1.2 'Merienda One', Helvetica, sans-serif;
+    color: rgba(0,0,0,0.7);
+    text-shadow: 3px 3px 3px #fff;
+    margin-left: 150px;
 }
 
-.show-description p {
-  height: 150px;
+h3{
+    font: 90 70px/1.2 'Merienda One', Helvetica, sans-serif;
+    color: rgba(0,0,0,0.7);
+    text-shadow: 3px 3px 3px #fff;
 }
 
-.show-description small {
-  opacity: 1;
-}
-.button {
+
+.headings{
+
+    font: 100 50px/1.3 'Berkshire Swash', Helvetica, sans-serif;
+    color: rgba(0,0,0,0.7);
+    text-shadow: 1px 1px 0px #ededed, 4px 4px 0px rgba(0,0,0,0.15);
+    text-decoration: none;
+    margin-left: 10px;
+    padding-left: 120px;
      
-    /*Step 2: Basic Button Styles*/
-    display: block;
-    height: 100px;
-    width: 300px;
-    background: #34696f;
-    border: 2px solid rgba(33, 68, 72, 0.59);
-     
-    /*Step 3: Text Styles*/
-    color: rgba(0, 0, 0, 0.55);
+}
+
+.box {
+    border: 1px solid #a1a1a1;
+    border-radius: 25px;
+    height: 150px;
+    width: 150px;
     text-align: center;
-    font: bold 3.2em/100px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
-     margin-left: -180px;
-    margin-top: 50px;
+    margin-left: 1100px;
+}
+
+.text{
+  font-size: 20px;
+  text-decoration: none;
 }
  
-.button1 {
 
-display: block;
-    height: 100px;
-    width: 300px;
-    background: #34696f;
-    border: 2px solid rgba(33, 68, 72, 0.59);
-     
-    /*Step 3: Text Styles*/
-    color: rgba(0, 0, 0, 0.55);
-    text-align: center;
-    font: bold 3.2em/100px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
-     margin-left: 150px;
-    margin-top: -105px;
-
-}
-.button2 {
-display: block;
-    height: 100px;
-    width: 630px;
-    background: #34696f;
-    border: 2px solid rgba(33, 68, 72, 0.59);
-     
-    /*Step 3: Text Styles*/
-    color: rgba(0, 0, 0, 0.55);
-    text-align: center;
-    font: bold 3.2em/100px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
-     margin-left: -180px;
-    margin-top: 10px;
-}
-
-.video-container {
+.stockmarket {
     position: relative;
     padding-bottom: 70.25%;
     padding-top: 90px;
     height: 0;
     overflow: hidden;
-    margin-left: -200px;
+    margin-left: 50px;
 }
 
-.video-container iframe,  
-.video-container object,  
-.video-container embed {
-    position: absolute;
-    top: -100;
-    left: 0;
-    width: 60%;
-    height: 60%;
+.video{
+    margin-left: 300px;
 }
+
+
 
 </style>
 
@@ -167,57 +74,57 @@ display: block;
 
 <body>
 
+<h1>Finance Web Application</h1>
+<hr>
+
+<div class="titles">
+
 {% if user.is_authenticated %}
-
-<h1> Welcome to Finance Web Application, {{ user.username }}!</h1>
-
+<a href="myprojects" class="headings">My Projects</a>
 {% else %}
+<a href="notauser" class="headings">My Projects</a>
+{% endif %}
+<a href="" class="headings">Our Features</a>
+<a href="" class="headings">Our App</a>
 
-<h1> Welcome to Finance Web Application: Log in or create an account </h1>
-<h2>Hello Start-ups</h2>
+</div>
 
+
+<hr>
+
+
+<div class="box">
+
+{% if user.is_authenticated %}
+<br></br>
+<a href="restricted" class="text">Restricted Page</a>
+<br></br>
+<a href="logout" class="text">Logout</a><br />
+{% else %}
+<br></br>
+<a href="register" class="text">Register Here</a>
+<br></br>
+<a href="login" class="text">Login</a><br />
 {% endif %}
 
-
-<div class="first">
- <a href="signup" class="button">Sign Up</a>
- <br></br>
- <a href="signin" class="button">Sign In</a>
- <br></br>
- <a href="" class="button">Our Features</a>
- <br></br>
- <a href="" class="button">Our App</a>
- <br></br>
-  <a href="myprojects" class="button">My Projects</a>
-  <br></br>
-  <link href="hello.css" rel="stylesheet">
-   
-</div>
-
-<br></br>
-<br></br>
-
-<div class="video-container">
-<iframe src="http://player.vimeo.com/video/6284199?title=0&byline=0&portrait=0" width="800" height="450" frameborder="0"></iframe>
 </div>
 
 
-<h3>
-<iframe src="http://embed.wistia.com/deliveries/a772b411b0d54939a4e8e906251d7b4838b19e63/file.mp4" width="500" height="450" frameborder="0"></iframe>
+<br><br><br><br>
 
-</h3>
+<h2>Demo Video</h2>
+<div class="stockmarket">
 
-<h4>
-<iframe src="https://www.zawya.com/middle-east/financial-markets/egypt/" width="750" height="800">  
-</iframe>
-</h4>
+<iframe class="video" src="http://embed.wistia.com/deliveries/a772b411b0d54939a4e8e906251d7b4838b19e63/file.mp4" width="500" height="450" frameborder="0"></iframe>
+<br></br>
+<h2>Our Stock Market</h2>
+<iframe src="https://www.zawya.com/middle-east/financial-markets/egypt/" width="1150" height="1000"></iframe>
+</div>
 
 
-<script>
-  $('div').on('click', function() {
-      $(this).toggleClass('show-description');
-  });
-</script>
-<footer>
-<v>contact us ....</v>
+<hr>
+<h3>Contact Us</h3>
+
+
+
 </body>
