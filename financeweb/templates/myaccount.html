@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+	h1 {
+		background-color: #30D683;
+		text-align: center;
+		color: #F0F0F0 ;
+	}
+
+    p{
+    	text-align: center;
+    	font-family: "Arial Black", Gadget, sans-serif;
+    	font-size: 100%;
+    	color: #30D683;
+    }
+    body{
+    	background-color: #989898;
+    }
+
+    </style>
+</head>
+
+<body>
+  <h1>Finance Web Application</h1>
+  <p>My Account</p>
+  <br></br>
+  <br></br>
+  <h>welcome to your finance web page</h> 
+  <br></br>
+  <label>Email: {{u.user_email}}</label>
+  <br></br>
+  <label>First Name: {{u.first_name}}</label>
+  <br></br>
+  <label>Last Name: {{u.Last_name}}</label>
+  <br></br>
+  <label>Company Name: {{u.company_name}}</label>
+  <br></br>
+  <label>Date of origin: {{u.company_date_of_origin}}</label>
+  <br></br>
+  <a href="editprofile/{{ u.id }}">Edit your information </a>
+</body>
+
+</html>

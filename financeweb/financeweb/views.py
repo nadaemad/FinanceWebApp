@@ -1,68 +1,40 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import Context, RequestContext
-
 from app1.models import *
-
 from django.contrib.auth import authenticate, login
+from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, render_to_response, RequestContext
+from django.template import Context
+from app1.forms import UserForm, UserProfileForm
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+
+
+def home3(request, u_id):
+	u = user.objects.get(id=u_id)
+	return render_to_response('homepage3.html', {'u': u}, context_instance=RequestContext(request))
+
+
+def editprofile(request, u_id):
+	u = user.objects.get(id=u_id)
+	return render_to_response('editprofile.html', {'u': u}, context_instance=RequestContext(request))   
+
+
+def myaccount(request, u_id):
+	u = user.objects.get(id=u_id)
+	return render_to_response('myaccount.html', {'u': u}, context_instance=RequestContext(request))   
 
 
 def home(request):
 	return render_to_response('home.html', {}, context_instance=RequestContext(request))
 
+
 def home2(request):
 	return render_to_response('homepage2.html', {}, context_instance=RequestContext(request))
-
-def login_user(request):
-    context = RequestContext(request)
-    #language = 'en-gb'
-    #session_language = 'en-gb'
-
-    #Here the user log ins and starts authentication w hawelt a3mel session w ma3rafsh keda sahh wala la2
-
-    state = "Please login below..."
-    username = password = ''
-    if request.POST:
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            #language = request.COOKIES['language']
-
-            if user.is_active:
-                u = user.objects.get(username=request.POST['username'])
-                login(request, user)
-                if u.password == request.POST['password']:
-                    request.session['user'] = u.email
-                    state = "You're successfully logged in!"
-                    return render_to_response('home.html',{'state':state, 'username': username}, context)
-            else:
-                state = "Your account is not active, please contact the site admin."
-        else:
-            state = "Your username and/or password were incorrect."
-            
-    return render_to_response('signin.html',{'state':state, 'username': username}, context)
-
-def abc(request):
-
-	if request.POST:
-		email = request.POST['email']
-		username = request.POST['username']
-		firstname = request.POST['fn']
-		lastname = request.POST['ln']
-		password = request.POST['pass']
-		confirmpassword = request.POST['cpass'] 
-		companyname = request.POST['cname']
-		dateoforigin = request.POST['date']
-
-		u = user(user_email=email, user_name=username, first_name=firstname, Last_name=lastname, password=password, confirm_password=confirmpassword, company_name=companyname, company_date_of_origin=dateoforigin)
-		u.save()
-		return render_to_response('homepage2.html', {}, context_instance=RequestContext(request))
-
-	else:
-		return render_to_response('signup.html', {}, context_instance=RequestContext(request))
-
 
 
 def newproject(request):
@@ -158,4 +130,78 @@ def myprojects(request):
 		p.save()
 		print Project.objects.all()
 	return render_to_response('myprojects.html', {'projects':Project.objects.all()}, context_instance=RequestContext(request))
-	
+
+
+def notauser(request):
+	return render_to_response('notauser.html', {}, context_instance=RequestContext(request))
+
+
+def register(request):
+    context = RequestContext(request)
+    registered = False
+
+    if request.method == 'POST':
+        # Attempt to grab information from the raw form information.
+        # Note that we make use of both UserForm and UserProfileForm.
+        user_form = UserForm(data=request.POST)
+        profile_form = UserProfileForm(data=request.POST)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            # Save the user's form data to the database.
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
+            registered = True
+        else:
+            print user_form.errors, profile_form.errors
+    # Not a HTTP POST, so we render our form using two ModelForm instances.
+    # These forms will be blank, ready for user input.
+    else:
+        user_form = UserForm()
+        profile_form = UserProfileForm()
+
+    # Render the template depending on the context.
+    return render_to_response(
+            'register.html',
+            {'user_form': user_form, 'profile_form': profile_form, 'registered': registered},
+            context)
+
+
+def user_login(request):
+
+    context = RequestContext(request)
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+
+        if user:
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect('/home')
+            else:
+                return HttpResponse("Your financeweb account is disabled.")
+        else:
+            print "Invalid login details: {0}, {1}".format(username, password)
+            return HttpResponse("Invalid login details supplied.")
+    else:
+        return render_to_response('login.html', {}, context)
+
+
+@login_required
+def restricted(request):
+    return HttpResponse("Since you're logged in, you can see this text!")
+
+
+# Use the login_required() decorator to ensure only those logged in can access the view.
+@login_required
+def user_logout(request):
+    # Since we know the user is logged in, we can now just log them out.
+    logout(request)
+
+    # Take the user back to the homepage.
+    return HttpResponseRedirect('home')
+
