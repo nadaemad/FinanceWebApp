@@ -19,12 +19,9 @@ urlpatterns = patterns('',
     url(r'^viewproject/myprojects$', myprojects, name='myprojects'),
     url(r'^viewproject/viewproject/(?P<post_id>\d+)$', viewproject, name='viewproject'),
 
-
-    url(r'^homepage2$', home2, name='home2'),
-    url(r'^homepage3/(?P<u_id>\d+)$', home3, name='home3'),
-
 	url(r'^myaccount/(?P<u_id>\d+)$', myaccount, name='myaccount'),
-	url(r'^editprofile/(?P<u_id>\d+)$', editprofile, name='editprofile'),
+	url(r'^myaccount/editprofile/(?P<u_id>\d+)$', editprofile, name='editprofile'),
+    url(r'^myaccount/editprofile/myaccount/(?P<u_id>\d+)$', myaccount, name='myaccount'),
 
     url(r'^register$', register, name='register'),
     url(r'^login$', user_login, name='login'), 

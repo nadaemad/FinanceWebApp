@@ -57,40 +57,40 @@ body {background-color: #C8C8C8
       <div class="one">
         <div class="register">
           <h3>Edit your personal information</h3>
-          <form id="reg-form" action="edit-profile" method="post">
+          <form id="reg-form" action="{% url 'myaccount' u.id %}" method="post">{% csrf_token %}
             <div>
               <label for="fisrtname">First Name</label>
-              <input type="text" id="firstname" spellcheck="false" 
-                     placeholder="your name"/>
+              <input type="text" name="firstname" spellcheck="false" 
+                     placeholder="{{ u.first_name }}"/>
             </div>
             <div>
             <label for="lastname">Last Name</label>
-              <input type="text" id="lastname" spellcheck="false" 
-                     placeholder="your name"/>
+              <input type="text" name="lastname" spellcheck="false" 
+                     placeholder="{{ u.last_name }}"/>
             </div>
             <div>
               <label for="email">Email</label>
-              <input type="text" id="email" spellcheck="false" placeholder="shridhardeshmukh@xyz.com"/>
+              <input type="text" name="email" spellcheck="false" placeholder="{{ u.email }}"/>
             </div>
             <div>
               <label for="companyname">Company Name</label>
-              <input type="text" id="companyname" spellcheck="false" placeholder="your company"/>
+              <input type="text" name="companyname" spellcheck="false" placeholder="{{ u2.companyname }}"/>
             </div>          
             <div>
             <label for="oldpassword">Old Password</label>
-              <input type="password" id="oldpassword" />
+              <input type="password" name="oldpassword" />
             </div>
             <div>
               <label for="newpassword">New Password</label>
-              <input type="password" id="newpassword" />
+              <input type="password" name="newpassword" />
             </div>
             <div>
               <label for="password-again">Confirm Password</label>
-              <input type="password" id="password-again" />
+              <input type="password" name="password-again" />
             </div>
             <div>
               <label></label>
-              <input type="submit" value="submit changes" id="create-account" class="button"/>
+              <input type="submit" value="submitchanges" id="create-account" class="button"/>
             </div>
           </form>
         </div>
