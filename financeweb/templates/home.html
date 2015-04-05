@@ -38,6 +38,16 @@ h3{
      
 }
 
+.experience{
+
+    font: 70 50px/1.3 'Berkshire Swash', Helvetica, sans-serif;
+    color: rgba(0,0,0,0.7);
+    text-shadow: 1px 1px 0px #ededed, 4px 4px 0px rgba(0,0,0,0.15);
+    text-decoration: none;
+    margin-left: 450px;
+    padding-left: 120px;
+}
+
 .box {
     border: 1px solid #a1a1a1;
     border-radius: 25px;
@@ -92,11 +102,13 @@ h3{
 
 <hr>
 
+<a href="" class="experience">Share Your Experience</a>
+
 <div class="box">
 
 {% if user.is_authenticated %}
 <br></br>
-<a href="restricted" class="text">Restricted Page</a>
+<a href="myaccount/{{ user.id }}" class="text">My Account</a>
 <br></br>
 <a href="logout" class="text">Logout</a><br />
 {% else %}

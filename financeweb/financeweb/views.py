@@ -12,33 +12,40 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.contrib.auth.models import User
 
 
 def home3(request, u_id):
-	u = user.objects.get(id=u_id)
+	u = User.objects.get(id=u_id)
 	return render_to_response('homepage3.html', {'u': u}, context_instance=RequestContext(request))
 
 
 def editprofile(request, u_id):
-	u = user.objects.get(id=u_id)
-	return render_to_response('editprofile.html', {'u': u}, context_instance=RequestContext(request))   
+	u = User.objects.get(id=u_id)
+	u2 = UserProfile.objects.get(user=u)
+	return render_to_response('editprofile.html', {'u': u, 'u2': u2}, context_instance=RequestContext(request))   
 
 
 def myaccount(request, u_id):
-	u = user.objects.get(id=u_id)
-	return render_to_response('myaccount.html', {'u': u}, context_instance=RequestContext(request))   
+	u = User.objects.get(id=u_id)
+	u2 = UserProfile.objects.get(user=u)
+
+	if request.POST:
+		firstname = request.POST['firstname']
+		u.firstname = firstname
+		u.save()
+		
+
+	return render_to_response('myaccount.html', {'u': u, 'u2': u2}, context_instance=RequestContext(request))   
 
 
 def home(request):
 	return render_to_response('home.html', {}, context_instance=RequestContext(request))
 
 
-def home2(request):
-	return render_to_response('homepage2.html', {}, context_instance=RequestContext(request))
-
-
 def newproject(request):
 	return render_to_response('newproject.html', {}, context_instance=RequestContext(request))
+
 
 def viewproject(request, post_id):
 	p = Project.objects.get(id=post_id)
