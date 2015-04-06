@@ -29,13 +29,10 @@ def editprofile(request, u_id):
 def myaccount(request, u_id):
 	u = User.objects.get(id=u_id)
 	u2 = UserProfile.objects.get(user=u)
-
 	if request.POST:
 		firstname = request.POST['firstname']
 		u.firstname = firstname
 		u.save()
-		
-
 	return render_to_response('myaccount.html', {'u': u, 'u2': u2}, context_instance=RequestContext(request))   
 
 
