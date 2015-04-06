@@ -40,8 +40,10 @@ def home(request):
 	return render_to_response('home.html', {}, context_instance=RequestContext(request))
 
 
-def newproject(request):
-	return render_to_response('newproject.html', {}, context_instance=RequestContext(request))
+def newproject(request, u_id):
+	u = User.objects.get(id=u_id)
+	u2 = UserProfile.objects.get(user=u)
+	return render_to_response('newproject.html', {'u': u, 'u2': u2}, context_instance=RequestContext(request))
 
 
 def viewproject(request, post_id):
@@ -101,7 +103,9 @@ def updateproject(request, post_id):
 		return render_to_response('updateproject.html', {'p':p, 'e':exp}, context_instance=RequestContext(request))
 
 
-def myprojects(request):
+def myprojects(request, u_id):
+	u = User.objects.get(id=u_id)
+	u2 = UserProfile.objects.get(user=u)
 
 	if request.POST:
 		pname = request.POST['pname']
@@ -122,7 +126,7 @@ def myprojects(request):
 
 		gp = Gprofit(pamount = pamount)
 		gp.save()
-		p = Project(pname=pname, prof=gp)
+		p = Project(pname=pname, prof=gp ,client=u2)
 		p.save()
 		j=0;
 		while(j<i):
@@ -133,7 +137,7 @@ def myprojects(request):
 
 		p.save()
 		print Project.objects.all()
-	return render_to_response('myprojects.html', {'projects':Project.objects.all()}, context_instance=RequestContext(request))
+	return render_to_response('myprojects.html', {'projects':Project.objects.all(), 'u': u, 'u2': u2}, context_instance=RequestContext(request))
 
 
 def notauser(request):
@@ -185,7 +189,8 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect('/home')
+                u2 = UserProfile.objects.get(user=user)
+                return render_to_response('home.html', {'user':user, 'user2':u2}, context)
             else:
                 return HttpResponse("Your financeweb account is disabled.")
         else:

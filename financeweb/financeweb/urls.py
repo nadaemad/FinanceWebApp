@@ -11,9 +11,9 @@ urlpatterns = patterns('',
     url(r'^home$', home, name='home'),
 
 
-	url(r'^myprojects$', myprojects, name='myprojects'),
-    url(r'^newproject$', newproject, name='newproject'),
-    url(r'^viewproject/(?P<post_id>\d+)$', viewproject, name='viewproject'),
+	url(r'^myprojects/(?P<u_id>\d+)$', myprojects, name='myprojects'),
+    url(r'^myprojects/newproject/(?P<u_id>\d+)$', newproject, name='newproject'),
+    url(r'^myprojects/viewproject/(?P<post_id>\d+)$', viewproject, name='viewproject'),
     url(r'^updateproject/(?P<post_id>\d+)$', updateproject, name='updateproject'),
     url(r'^viewproject/home$', home, name='home'),
     url(r'^viewproject/myprojects$', myprojects, name='myprojects'),

@@ -67,7 +67,7 @@
 
 	<br></br>
 
-	<form method='post' action="{% url 'myprojects' %}">{% csrf_token %}
+	<form method='post' action="{% url 'myprojects' u.id %}">{% csrf_token %}
 
 		<label>Project Name: </label> 
 		<input type="text" name="pname" placeholder="Enter a project name">*<br><br>
