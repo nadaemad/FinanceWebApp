@@ -55,13 +55,15 @@
 
 	
 	{% for p in projects %}
+		{% if u2 == p.client %}
 		<a class="projects" href="viewproject/{{ p.id }}">Project Name: {{ p.pname }}</a>
 		<br></br>
+		{% endif %}
 	{% endfor %}
 
 	<br>
 
-    <a class="newproject" href="newproject">+ Create a new project</a></p>
+    <a class="newproject" href="{% url 'newproject' u.id %}">+ Create a new project</a></p>
     <hr>
 
 

@@ -16,14 +16,6 @@ class Gprofit(models.Model):
 		return unicode(self.pamount)
 
 
-class Project(models.Model):
-	pname = models.CharField(max_length=30)
-	exp = models.ManyToManyField(Expense)
-	prof = models.ForeignKey(Gprofit)
-	def __unicode__(self):
-		return unicode(self.pname)
-
-
 class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.
     user = models.OneToOneField(User)
@@ -34,6 +26,15 @@ class UserProfile(models.Model):
     # Override the __unicode__() method to return out something meaningful!
     def __unicode__(self):
         return self.user.username
+
+
+class Project(models.Model):
+	pname = models.CharField(max_length=30)
+	exp = models.ManyToManyField(Expense)
+	prof = models.ForeignKey(Gprofit)
+	client = models.ForeignKey(UserProfile)
+	def __unicode__(self):
+		return unicode(self.pname)
 
 
 
