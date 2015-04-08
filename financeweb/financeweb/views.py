@@ -214,3 +214,39 @@ def user_logout(request):
     # Take the user back to the homepage.
     return HttpResponseRedirect('home')
 
+def deleteproject(request,p_id,u_id):
+	u = User.objects.get(id=u_id)
+	u2 = UserProfile.objects.get(user=u)
+	
+	if request.POST:
+		project= Project.objects.get(id=p_id)
+		project.delete()
+		return render_to_response('myprojects.html', {'projects':Project.objects.all(), 'u': u, 'u2': u2}, context_instance=RequestContext(request))
+
+
+def ourapp(request):
+	return render_to_response('ourapp.html', {}, context_instance=RequestContext(request))
+
+
+def ourfeatures(request):
+	return render_to_response('ourfeatures.html', {}, context_instance=RequestContext(request))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

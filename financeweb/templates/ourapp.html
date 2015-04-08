@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>Our Application</title>
+
+    <style>
+@import url(http://fonts.googleapis.com/css?family=Exo:100,200,400);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
+
+body{
+
+margin: 0;
+padding: 0;
+background: #fff;
+
+color: #fff;
+font-family: Arial;
+font-size: 12px;
+}
+
+.body{
+position: absolute;
+top: -20px;
+left: -20px;
+right: -40px;
+bottom: -40px;
+width: auto;
+height: auto;
+background-image: url(http://ginva.com/wp-content/uploads/2012/07/city-skyline-wallpapers-008.jpg);
+background-size: auto;
+-webkit-filter: blur(5px);
+z-index: 0;
+}
+
+.grad{
+position: absolute;
+top: -20px;
+left: -20px;
+right: -40px;
+bottom: -40px;
+width: auto;
+height: auto;
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
+z-index: 1;
+opacity: 0.7;
+}
+
+.header{
+position: absolute;
+top: calc(50% - 35px);
+left: calc(50% - 255px);
+z-index: 2;
+}
+
+.header div{
+float: left;
+color: #fff;
+font-family: 'Exo', sans-serif;
+font-size: 28px;
+font-weight: 200;
+}
+
+.header div span{
+color: #5379fa !important;
+}
+
+
+
+</style>
+
+    <script src="js/prefixfree.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="body">
+</div>
+<div class="grad"></div>
+<div class="header">
+<div>
+<a href="home">Go to Homepage</a>
+<h5>Starting your own business is a very demanding job and at the beginning, it is quite usual for the founders to be handling the finances instead of hiring an accountant. The goal of this app is to help small business owners handle their own finances.</h5>
+<h5>Our Finance Web Application helps you put all your accounts and projects into one place and know exactly how your money is being utilised. This application will also help you through the basic Accounting steps, reduce uncrucial expenses, and help you build your future goals.</h5>
+</div>
+<br>
+
+<br>
+</div>
+<br>
+ 
+
+  <script src='http://codepen.io/assets/libs/fullpage/jquery.js'></script>
+
+</body>
+
+</html>
