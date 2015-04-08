@@ -39,4 +39,6 @@ urlpatterns = patterns('',
     url(r'^blog/viewpost/(?P<post_id>\d+)$', viewpost, name="viewpost"),
     url(r'^viewpost/viewpost/(?P<post_id>\d+)$', viewpost, name="viewpost"),
     url(r'^newpost$', makepost, name="makepost"),
+
+    url(r'^contact/', include('contact_form.urls')),
 )
