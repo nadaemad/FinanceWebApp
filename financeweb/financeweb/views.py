@@ -1,19 +1,28 @@
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render_to_response
 from django.template import Context, RequestContext
 from app1.models import *
-from django.contrib.auth import authenticate, login
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, render_to_response, RequestContext
-from django.template import Context
-from app1.forms import UserForm, UserProfileForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render, render_to_response, RequestContext
+from app1.forms import UserForm, UserProfileForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
+from django.contrib.auth.views import password_reset, password_reset_confirm
 
+
+def reset(request):
+	return password_reset(request, template_name='reset.html', email_template_name='reset_email.html', 
+		subject_template_name='reset_subject.txt', post_reset_redirect= reverse('success'))
+
+def reset_confirm(request, uidb64=None, token=None):
+	return password_reset_confirm(request, template_name='reset_confirm.html',
+		uidb36=uidb36, token=token, post_reset_redirect=reverse('success'))
+
+def success(request):
+	return render(request, "success.html")
 
 def home3(request, u_id):
 	u = User.objects.get(id=u_id)
@@ -163,6 +172,16 @@ def register(request):
             profile.user = user
             profile.save()
             registered = True
+
+            #send_mail('subject is put here', 'message is here', 'from_email', 'to_list - which is the list of emails I want to send the mail to, in this case one', 'fail_silently=True')
+            subject = 'Welcome to Finance Web App'
+            message = 'You are now a registered user on Finance Web App. We are at your service, we hope you find all that you need here.'
+            from_email = settings.EMAIL_HOST_USER
+            to_list = [user.email, settings.EMAIL_HOST_USER]
+
+            send_mail(subject, message, from_email, to_list, fail_silently=True)
+
+            messages.success(request, 'Thank you for registering, you will receive an email shortly')
         else:
             print user_form.errors, profile_form.errors
     # Not a HTTP POST, so we render our form using two ModelForm instances.

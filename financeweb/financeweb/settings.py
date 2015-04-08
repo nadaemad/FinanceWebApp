@@ -7,6 +7,13 @@ https://docs.djangoproject.com/en/1.7/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
+from .email_info import *
+
+EMAIL_USE_TLS = EMAIL_USE_TLS 
+EMAIL_HOST = EMAIL_HOST
+EMAIL_HOST_USER = EMAIL_HOST_USER 
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
+EMAIL_PORT = EMAIL_PORT
 
 import os.path
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -33,7 +40,11 @@ ALLOWED_HOSTS = []
 
 LOGIN_URL = 'login'
 
+ADMINS = (
+    'Nada Emad', 'nada.emad8@gmail.com')
 
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+MANAGERS = ADMINS
 # Application definition
 
 INSTALLED_APPS = (
@@ -44,6 +55,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app1',
+    'password_reset',
 )
 
 MIDDLEWARE_CLASSES = (
