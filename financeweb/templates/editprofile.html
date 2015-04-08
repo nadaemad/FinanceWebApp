@@ -61,20 +61,19 @@ body {background-color: #C8C8C8
             <div>
               <label for="fisrtname">First Name</label>
               <input type="text" name="firstname" spellcheck="false" 
-                     placeholder="{{ u.first_name }}"/>
+                     value="{{ u.first_name }}"/>
             </div>
             <div>
             <label for="lastname">Last Name</label>
-              <input type="text" name="lastname" spellcheck="false" 
-                     placeholder="{{ u.last_name }}"/>
+              <input type="text" name="lastname" spellcheck="false"  value="{{ u.last_name }}"/>
             </div>
             <div>
               <label for="email">Email</label>
-              <input type="text" name="email" spellcheck="false" placeholder="{{ u.email }}"/>
+              <input type="text" name="email" spellcheck="false" value="{{ u.email }}"/>
             </div>
             <div>
               <label for="companyname">Company Name</label>
-              <input type="text" name="companyname" spellcheck="false" placeholder="{{ u2.companyname }}"/>
+              <input type="text" name="companyname" spellcheck="false" value="{{ u2.companyname }}"/>
             </div>          
             <div>
             <label for="oldpassword">Old Password</label>

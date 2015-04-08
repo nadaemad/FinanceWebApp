@@ -27,13 +27,26 @@ def editprofile(request, u_id):
 
 
 def myaccount(request, u_id):
-	u = User.objects.get(id=u_id)
-	u2 = UserProfile.objects.get(user=u)
+	# u = User.objects.get(id=u_id)
+	# u2 = UserProfile.objects.get(user=u)
 	if request.POST:
-		firstname = request.POST['firstname']
-		u.firstname = firstname
-		u.save()
-	return render_to_response('myaccount.html', {'u': u, 'u2': u2}, context_instance=RequestContext(request))   
+		user = request.user
+		user.first_name = request.POST['firstname']
+		user.save()
+
+		user.last_name = request.POST['lastname']
+		user.save()
+
+		user.email = request.POST['email']
+		user.save()
+
+		user.user_profile.companyname = request.POST['companyname']
+		user.save()
+
+		user.password = request.POST['newpassword']
+		user.save()
+
+	return render_to_response('myaccount.html', {'u': request.user, 'u2': request.user.user_profile}, context_instance=RequestContext(request))   
 
 
 def home(request):
@@ -214,3 +227,36 @@ def user_logout(request):
     # Take the user back to the homepage.
     return HttpResponseRedirect('home')
 
+def viewallposts(request):
+	if request.POST:
+		title= request.POST['title']
+		text= request.POST['text']
+		Post(title=title, text=text).save()
+
+	return render_to_response('Allposts.html', {
+		 	'posts':Post.objects.all(),
+		 	}, context_instance=RequestContext(request))
+
+
+def viewpost(request, post_id):
+	p = Post.objects.get(id=post_id)
+
+	if request.POST:
+		comment_text = request.POST['comment']
+		c = comment(post=p, comment=comment_text)
+		c.save()
+	return render_to_response('viewpost.html', {
+       	'p':p,
+        'comments': comment.objects.filter(post=p),
+
+    }, context_instance=RequestContext(request))
+
+
+def makepost(request):
+	if request.POST:
+		title= request.POST['title']
+		text= request.POST['text']
+		Post(title=title, text=text).save()
+	return render_to_response('newpost.html', {
+		 	'posts':Post.objects.all(),
+		 	}, context_instance=RequestContext(request))

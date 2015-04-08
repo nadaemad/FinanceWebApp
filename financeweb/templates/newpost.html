@@ -1,0 +1,18 @@
+<form method='post' action='/Allposts'>{% csrf_token %}
+	<label>Title:</label>
+	<input type='title' name='title' placeholder=''/>
+	<br></br>
+	<label>Body:</label>
+	<input type='text' name='text' placeholder='share your experience'/>
+	<br></br>
+	<input type='submit' name='submit' value='Post' />
+</form>
+
+
+<hr>
+<h3>All blog posts</h3>
+
+{% for p in posts %}
+	Title:<a class='comment' href="/blog/viewpost/{{ p.id }}">{{ p }}</a>
+	<br/>
+{% endfor %}

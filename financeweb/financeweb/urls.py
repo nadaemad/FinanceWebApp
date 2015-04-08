@@ -30,4 +30,8 @@ urlpatterns = patterns('',
 
     url(r'^notauser$', notauser, name='notauser'),
 
+    url(r'^Allposts$', viewallposts, name="viewallposts"),
+    url(r'^blog/viewpost/(?P<post_id>\d+)$', viewpost, name="viewpost"),
+    url(r'^viewpost/viewpost/(?P<post_id>\d+)$', viewpost, name="viewpost"),
+    url(r'^newpost$', makepost, name="makepost"),
 )
