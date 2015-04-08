@@ -9,7 +9,6 @@
 body {
   font-family: helvetica, sans-serif;
   background-color: #FFC0CB;
-
 }
 
 
@@ -24,6 +23,15 @@ h3{
     font: 90 70px/1.2 'Merienda One', Helvetica, sans-serif;
     color: rgba(0,0,0,0.7);
     text-shadow: 3px 3px 3px #fff;
+}
+
+.success{
+    font: 70 50px/1.3 'Berkshire Swash', Helvetica, sans-serif;
+    color: rgba(0,0,0,0.7);
+    text-shadow: 1px 1px 0px #ededed, 4px 4px 0px rgba(0,0,0,0.15);
+    text-decoration: none;
+    border: 1px solid #a1a1a1;
+    border-radius: 25px;
 }
 
 
@@ -94,8 +102,8 @@ h3{
 {% else %}
 <a href="notauser" class="headings">My Projects</a>
 {% endif %}
-<a href="" class="headings">Our Features</a>
-<a href="" class="headings">Our App</a>
+<a href="ourfeatures" class="headings">Our Features</a>
+<a href="ourapp" class="headings">Our App</a>
 
 </div>
 
@@ -104,8 +112,8 @@ h3{
 
 <a href="" class="experience">Share Your Experience</a>
 
-<div class="box">
 
+<div class="box">
 {% if user.is_authenticated %}
 <br></br>
 <a href="myaccount/{{ user.id }}" class="text">My Account</a>
@@ -117,15 +125,25 @@ h3{
 <br></br>
 <a href="login" class="text">Login</a><br />
 {% endif %}
+</div>
 
+<br></br>
+
+<div class="success">
+<h2>Success Stories</h2>
+<p>
+BILL GATES<br/>
+Gates earned the majority of his vast fortune as one of the founders of Microsoft Corporation, where he served as CEO, chairman, and chief software architect. Gates was the largest individual shareholder of Microsoft.<br/>
+FUN FACT : Bill Gates is 57 this year. If we assume that he will live for another 33 years, he has to spend $6 million per day to use up all of his wealth. <br/>
+</p>
 </div>
 
 
 <br><br><br><br>
 
-<h2>Demo Video</h2>
-<div class="stockmarket">
 
+<div class="stockmarket">
+<h2>Demo Video</h2>
 <iframe class="video" src="http://embed.wistia.com/deliveries/a772b411b0d54939a4e8e906251d7b4838b19e63/file.mp4" width="500" height="450" frameborder="0"></iframe>
 <br></br>
 <h2>Our Stock Market</h2>
@@ -136,6 +154,7 @@ h3{
 <hr>
 <h3>Contact Us</h3>
 <h4>E-mail: alexan.nader@gmail.com</h4>
+<h4>Phone: +201005070969</h4>
 
 
 
