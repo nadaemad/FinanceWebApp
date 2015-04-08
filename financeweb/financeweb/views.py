@@ -279,6 +279,14 @@ def ourfeatures(request):
 	return render_to_response('ourfeatures.html', {}, context_instance=RequestContext(request))
 
 
+def deletepost(request,post_id,u_id):
+	u = User.objects.get(id=u_id)
+	u2 = UserProfile.objects.get(user=u)
+	
+	if request.POST:
+		post= Post.objects.get(id=post_id)
+		post.delete()
+		return render_to_response('viewpost.html', {'posts':Post.objects.all(), 'u': u, 'u2': u2}, context_instance=RequestContext(request))
 
 
 
