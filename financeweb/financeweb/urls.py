@@ -35,4 +35,8 @@ urlpatterns = patterns('',
     url(r'^ourfeatures$', ourfeatures, name='ourfeatures'),
     url(r'^myprojects/home$', home, name='home'),
 
+    url(r'^Allposts$', viewallposts, name="viewallposts"),
+    url(r'^blog/viewpost/(?P<post_id>\d+)$', viewpost, name="viewpost"),
+    url(r'^viewpost/viewpost/(?P<post_id>\d+)$', viewpost, name="viewpost"),
+    url(r'^newpost$', makepost, name="makepost"),
 )
