@@ -29,6 +29,11 @@ urlpatterns = patterns('',
     url(r'^logout$', user_logout, name='logout'),
 
     url(r'^notauser$', notauser, name='notauser'),
+    url(r'^myprojects/deleteproject/(?P<p_id>\d+)/(?P<u_id>\d+)$', deleteproject, name='deleteproject'),
+
+    url(r'^ourapp$', ourapp, name='ourapp'),
+    url(r'^ourfeatures$', ourfeatures, name='ourfeatures'),
+    url(r'^myprojects/home$', home, name='home'),
 
     url(r'^Allposts$', viewallposts, name="viewallposts"),
     url(r'^blog/viewpost/(?P<post_id>\d+)$', viewpost, name="viewpost"),
