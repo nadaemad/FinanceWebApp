@@ -1,0 +1,25 @@
+
+{% for p in posts %}
+	<a class='post' href="blog/viewpost/{{ p.id }}">Title: {{ p }}</a>
+	<br/>
+{% endfor %}
+
+<a href="newpost">Create a new post</a>
+
+
+<style>
+
+body{
+      background-size: cover;
+      background-position: fixed;
+      text-align: center;
+}
+
+.post{
+	border: 1px solid black;
+	padding:10px;
+	display: block;
+	font-size: 20px
+}
+
+</style>

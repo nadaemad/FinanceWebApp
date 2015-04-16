@@ -18,7 +18,7 @@ class Gprofit(models.Model):
 
 class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, related_name='user_profile')
 
     # The additional attributes we wish to include.
     companyname = models.CharField(max_length=200)
@@ -38,3 +38,14 @@ class Project(models.Model):
 
 
 
+class Post (models.Model):
+	text = models.CharField(max_length=500)
+	title= models.CharField(max_length=100)
+	def __unicode__(self):
+		return self.title
+
+class comment(models.Model):
+	comment = models.TextField()
+	post = models.ForeignKey(Post)
+	def __unicode__(self):
+		return self.comment

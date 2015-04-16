@@ -55,7 +55,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app1',
+
     'password_reset',
+
+    'contact_form'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -103,3 +106,15 @@ STATIC_URL = '/static/'
 STAIC_ROOT = os.path.join(BASE_DIR,'static')
 MEDIA_ROOT = os.path.join(BASE_DIR,'static/media')
 MEDIA_URL = '/media/'
+
+EMAIL_USE_TLS = True  
+EMAIL_HOST = 'smtp.gmail.com'  
+EMAIL_PORT = 587  
+EMAIL_HOST_USER = 'youssef.montasserr@gmail.com' 
+EMAIL_HOST_PASSWORD = 'u7jojvx7' 
+
+ADMINS = (
+    ('your_name', 'your_email'), 
+)
+
+MANAGERS = ADMINS
