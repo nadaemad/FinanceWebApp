@@ -30,4 +30,8 @@ urlpatterns = patterns('',
 
     url(r'^notauser$', notauser, name='notauser'),
 
+    url(r'^resetpassword/passwordsent/$', 'django.contrib.auth.views.password_reset_done'),
+    url(r'^resetpassword/$', 'financeweb.views.reset', name='reset'),
+    url(r'^reset/(?P<uidb64>[0-9A-Za-z]+)/(?P<token>.+)/$', 'financeweb.views.reset_confirm', name='password_reset_confirm'),
+    url(r'^reset/done/$', 'financeweb.views.success', name='success'),
 )
