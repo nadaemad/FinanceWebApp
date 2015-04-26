@@ -58,6 +58,10 @@
 	<h3>Gross Profit</h3>
 	<label>${{ p.prof }}</label>
 	<br></br>
+	<h3>Gross Profit Date</h3>
+	<label>{{ profit.profit_date }}</label>
+	<br></br>
+
 	
 	<h3>Expenses</h3>
 
@@ -65,6 +69,8 @@
 		<label>Expense Name: {{ x.ename }} </label> 
 		<br>
 		<label>Expense Amount: ${{ x.eamount }} </label> 
+		<br>
+		<label>Expense Date: {{ x.expense_date }} </label> 
 		<br></br>
 	{% endfor %}
 

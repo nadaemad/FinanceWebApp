@@ -70,14 +70,15 @@ def newproject(request, u_id):
 
 def viewproject(request, post_id):
 	p = Project.objects.get(id=post_id)
+	profit = p.prof
 	exp = Project.objects.get(id=post_id).exp.all()
 
-	return render_to_response('viewproject.html', {'p':p, 'e':exp}, context_instance=RequestContext(request))
+	return render_to_response('viewproject.html', {'p':p, 'profit':profit, 'e':exp}, context_instance=RequestContext(request))
 
 
 def updateproject(request, post_id):
 	p = Project.objects.get(id=post_id)
-	gp = Project.objects.get(id=post_id).prof
+	profit = p.prof
 	exp = Project.objects.get(id=post_id).exp.all()
 
 	if request.POST:
@@ -86,43 +87,49 @@ def updateproject(request, post_id):
 		p.save()
 
 		nprof = request.POST['newprofit']
-		gp.pamount = nprof;
-		gp.save()
+		profit.pamount = nprof;
+		profit_date = request.POST['newprofitdate']
+		profit.profit_date = profit_date;
+		profit.save()
 
 
 		for e in exp:
 			name = request.POST['exp_name[%d]'%e.id]
 			amount = request.POST['exp_amount[%d]'%e.id]
+			expense_date = request.POST['expense_date[%d]'%e.id]
 			e.ename = name
 			e.eamount = amount
+			e.expense_date = expense_date
 			e.save()
 
 		#part of adding expenses men awel wegdeed#
 		enames = []
 		eamounts = []
+		expense_dates = []
 		done = False
 		i=0
 		while(not done):
 			try:
 				enames.append(request.POST['ename[%d]'%i])
 				eamounts.append(request.POST['eamount[%d]'%i])
+				expense_dates.append(request.POST['expense_date[%d]'%i])
 				i+=1
 			except:
 				done=True
 
 		j=0;
 		while(j<i):
-			e = Expense(ename = enames[j], eamount = eamounts[j])
+			e = Expense(ename = enames[j], eamount = eamounts[j], expense_date = expense_dates[j])
 			e.save()
 			p.exp.add(e)
 			j+=1
 
 		p.save()
 
-		return render_to_response('viewproject.html', {'p':p, 'e':exp}, context_instance=RequestContext(request))
+		return render_to_response('viewproject.html', {'p':p, 'profit':profit, 'e':exp}, context_instance=RequestContext(request))
 
 	else:
-		return render_to_response('updateproject.html', {'p':p, 'e':exp}, context_instance=RequestContext(request))
+		return render_to_response('updateproject.html', {'p':p, 'profit':profit, 'e':exp}, context_instance=RequestContext(request))
 
 
 def myprojects(request, u_id):
@@ -132,27 +139,30 @@ def myprojects(request, u_id):
 	if request.POST:
 		pname = request.POST['pname']
 		pamount = request.POST['pamount']
+		profit_date = request.POST['profit_date']
 		enames = []
 		eamounts = []
+		expense_dates = []
 		done = False
 		i=0
 		while(not done):
 			try:
 				enames.append(request.POST['ename[%d]'%i])
 				eamounts.append(request.POST['eamount[%d]'%i])
+				expense_dates.append(request.POST['expense_date[%d]'%i])
 				i+=1
 			except:
 				done=True
 		print 'enames', enames
 		print 'eamounts', eamounts
 
-		gp = Gprofit(pamount = pamount)
+		gp = Gprofit(pamount = pamount, profit_date = profit_date)
 		gp.save()
 		p = Project(pname=pname, prof=gp ,client=u2)
 		p.save()
 		j=0;
 		while(j<i):
-			e = Expense(ename = enames[j], eamount = eamounts[j])
+			e = Expense(ename = enames[j], eamount = eamounts[j], expense_date = expense_dates[j])
 			e.save()
 			p.exp.add(e)
 			j+=1
