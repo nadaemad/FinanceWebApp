@@ -3,7 +3,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html lang="en">
 
-<title>Project {{ p.pname }}</title>
+<title>Project: {{ p.pname }}</title>
 
 
 <style>
@@ -66,7 +66,7 @@
 	<form method='post' action="{% url 'updateproject' p.id %}">{% csrf_token %}
 
 	
-	<h1>{{ p.pname }} project</h1> 
+	<h1>Project: {{ p.pname }} </h1> 
 
 	<a class="home" href='/home'> Home Page</a>
 
@@ -79,8 +79,12 @@
 
 	<h3>Gross Profit</h3>
 		<label class="labels">Project Profit $</label>
-		<input type='text' value='{{ p.prof }}' name='newprofit'/>
+		<input type='text' value='{{ profit }}' name='newprofit'/>
+		<br></br>
+		<label class="labels">Profit Date</label>
+		<input type='text' value='{{ profit.profit_date }}' name='newprofitdate'/>
 	<br></br>
+
 	
 
 	<h3>Expenses</h3>
@@ -91,6 +95,10 @@
 
 		<label class="labels">Expense Amount $</label> 
 		<input type='text' value='{{ x.eamount }}' name='exp_amount[{{x.id}}]'/>
+		<br></br>
+
+		<label class="labels">Expense Date</label> 
+		<input type='text' value='{{ x.expense_date }}' name='expense_date[{{x.id}}]'/>
 		<br></br>
 	
 	{% endfor %}
@@ -130,6 +138,13 @@
 		var textbox2 = document.createElement("input");
 		textbox2.name = "eamount["+(index)+"]";
 
+		var label3 = document.createElement("label");
+		var ltext3 = document.createTextNode("Date:");
+		label3.appendChild(ltext3);
+
+		var textbox3 = document.createElement("input");
+		textbox3.name = "expense_date["+(index)+"]";
+
 		var line = document.createElement("br")
 
 		var element = document.getElementById("hi");
@@ -140,6 +155,8 @@
 		element.appendChild(textbox1);
 		element.appendChild(label2);
 		element.appendChild(textbox2);
+		element.appendChild(label3);
+		element.appendChild(textbox3);
 		element.appendChild(line);		
 	}
 

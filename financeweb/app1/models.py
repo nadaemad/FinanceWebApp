@@ -6,12 +6,14 @@ from django.contrib.auth.models import User
 class Expense(models.Model):
 	ename = models.CharField(max_length=50)
 	eamount = models.IntegerField(blank=False)
+	expense_date = models.DateField()
 	def __unicode__(self):
 		return unicode(self.ename)
 
 
 class Gprofit(models.Model):
 	pamount = models.IntegerField(blank=False)
+	profit_date = models.DateField()
 	def __unicode__(self):
 		return unicode(self.pamount)
 

@@ -74,6 +74,8 @@
 
 		<label>Gross Profit Amount: </label> 
 		<input type="number" name="pamount" placeholder="Enter your gross profit">*<br><br>
+		<label>Gross Profit Date: </label> 
+		<input type="date" name="profit_date" placeholder="Enter your profit date">*<br><br>
 
 		<button type='button' id="b1" onclick="myFunction()">Click here to add your expenses</button><br>
 		
@@ -93,7 +95,6 @@
 
 		var label1 = document.createElement("label");
 		var ltext1 = document.createTextNode("Expense Name:");
-		
 		label1.appendChild(ltext1);
 
 		var textbox1 = document.createElement("input");
@@ -106,6 +107,13 @@
 		var textbox2 = document.createElement("input");
 		textbox2.name = "eamount["+(index)+"]";
 
+		var label3 = document.createElement("label");
+		var ltext3 = document.createTextNode("Date:");
+		label3.appendChild(ltext3);
+
+		var textbox3 = document.createElement("date");
+		textbox3.name = "expense_date["+(index)+"]";
+
 		var line = document.createElement("br")
 
 		var element = document.getElementById("hi");
@@ -116,6 +124,8 @@
 		element.appendChild(textbox1);
 		element.appendChild(label2);
 		element.appendChild(textbox2);
+		element.appendChild(label3);
+		element.appendChild(textbox3);
 		element.appendChild(line);
 		
 		
