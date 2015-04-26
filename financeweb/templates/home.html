@@ -98,7 +98,7 @@ h3{
 <div class="titles">
 
 {% if user.is_authenticated %}
-<a href="myprojects/{{ user.id }}" class="headings">My Projects</a>
+<a href="{% url 'myprojects' user.id %}" class="headings">My Projects</a>
 {% else %}
 <a href="notauser" class="headings">My Projects</a>
 {% endif %}

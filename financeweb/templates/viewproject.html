@@ -56,13 +56,15 @@
 	<br>
 
 	<ul class="navigation">
-		<li><a href="about.html">Overview</a></li>
+		<li><a href="{% url 'overview_project' p.id %}">Overview</a></li>
 		<li><a href="{% url 'viewgrossprofit' p.id %}">Gross Profit</a></li>
 		<li><a href="{% url 'viewexpenses' p.id %}">Expenses</a></li>
 		<li><a href="#">Milestones</a></li>	
 		<li><a href="#">Statistics</a></li>
 		<li><a href="/updateproject/{{ p.id }}">Update</a></li>
 	</ul>
+
+	<label>{{ current_month }}</label>
 
 	<br>
 

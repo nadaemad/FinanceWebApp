@@ -11,6 +11,8 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.views import password_reset, password_reset_confirm
+from datetime import datetime
+import calendar
 
 
 def reset(request):
@@ -72,7 +74,6 @@ def viewproject(request, project_id):
 	p = Project.objects.get(id=project_id)
 	profit = p.prof
 	exp = p.exp.all()
-
 	return render_to_response('viewproject.html', {'p':p, 'profit':profit, 'e':exp}, context_instance=RequestContext(request))
 
 
@@ -330,8 +331,22 @@ def viewgrossprofit(request, project_id):
 	return render_to_response('viewgrossprofit.html', {'project':project, 'grossprofit':grossprofit}, context_instance=RequestContext(request))
 
 
+def overview_project(request, project_id):
+	project = Project.objects.get(id=project_id)
+	grossprofit = project.prof
+	expenses = project.exp.all()
 
+	cm = datetime.now().month
+	current_month = calendar.month_name[cm]
+	current_year = datetime.now().year
 
+	total = 0
+	for x in expenses:
+		if x.expense_date.year == current_year:
+			if x.expense_date.month == cm: 
+				total += x.eamount
+	net_profit = grossprofit.pamount - total
+	return render_to_response('overview_project.html', {'project':project, 'grossprofit':grossprofit, 'expenses':expenses, 'cm':cm, 'current_month':current_month, 'current_year':current_year, 'net_profit':net_profit}, context_instance=RequestContext(request))
 
 
 
