@@ -13,11 +13,11 @@ urlpatterns = patterns('',
 
 	url(r'^myprojects/(?P<u_id>\d+)$', myprojects, name='myprojects'),
     url(r'^myprojects/newproject/(?P<u_id>\d+)$', newproject, name='newproject'),
-    url(r'^myprojects/viewproject/(?P<post_id>\d+)$', viewproject, name='viewproject'),
+    #url(r'^myprojects/viewproject/(?P<post_id>\d+)$', viewproject, name='viewproject'),
     url(r'^updateproject/(?P<post_id>\d+)$', updateproject, name='updateproject'),
     url(r'^viewproject/home$', home, name='home'),
     url(r'^viewproject/myprojects$', myprojects, name='myprojects'),
-    url(r'^viewproject/viewproject/(?P<post_id>\d+)$', viewproject, name='viewproject'),
+    #url(r'^viewproject/viewproject/(?P<post_id>\d+)$', viewproject, name='viewproject'),
 
 	url(r'^myaccount/(?P<u_id>\d+)$', myaccount, name='myaccount'),
 	url(r'^myaccount/editprofile/(?P<u_id>\d+)$', editprofile, name='editprofile'),
@@ -44,4 +44,9 @@ urlpatterns = patterns('',
     url(r'^viewpost/viewpost/(?P<post_id>\d+)$', viewpost, name="viewpost"),
     url(r'^newpost$', makepost, name="makepost"),
 
+    url(r'^viewproject/(?P<project_id>\d+)$', viewproject, name='viewproject'),
+    url(r'^viewexpenses/(?P<project_id>\d+)$', viewexpenses, name="viewexpenses"),
+    url(r'^viewgrossprofit/(?P<project_id>\d+)$', viewgrossprofit, name="viewgrossprofit"),
+    url(r'^overview_project/(?P<project_id>\d+)$', overview_project, name="overview_project"),
+    
 )

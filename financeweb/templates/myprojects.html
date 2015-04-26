@@ -56,7 +56,7 @@
 	
 	{% for p in projects %}
 		{% if u2 == p.client %}
-		<a class="projects" href="viewproject/{{ p.id }}">Project Name: {{ p.pname }}</a>
+		<a class="projects" href="{% url 'viewproject' p.id %}">Project Name: {{ p.pname }}</a>
 
 		<form method='post' action="{% url 'deleteproject' p.id u.id %}">{% csrf_token %}
 		<input type='submit' class="submit" value="Delete">

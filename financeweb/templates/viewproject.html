@@ -55,30 +55,18 @@
 
 	<br>
 
-	<h3>Gross Profit</h3>
-	<label>${{ p.prof }}</label>
-	<br></br>
-	<h3>Gross Profit Date</h3>
-	<label>{{ profit.profit_date }}</label>
-	<br></br>
+	<ul class="navigation">
+		<li><a href="{% url 'overview_project' p.id %}">Overview</a></li>
+		<li><a href="{% url 'viewgrossprofit' p.id %}">Gross Profit</a></li>
+		<li><a href="{% url 'viewexpenses' p.id %}">Expenses</a></li>
+		<li><a href="#">Milestones</a></li>	
+		<li><a href="#">Statistics</a></li>
+		<li><a href="/updateproject/{{ p.id }}">Update</a></li>
+	</ul>
 
-	
-	<h3>Expenses</h3>
-
-	{% for x in e%}
-		<label>Expense Name: {{ x.ename }} </label> 
-		<br>
-		<label>Expense Amount: ${{ x.eamount }} </label> 
-		<br>
-		<label>Expense Date: {{ x.expense_date }} </label> 
-		<br></br>
-	{% endfor %}
+	<label>{{ current_month }}</label>
 
 	<br>
-
-	<a class="update" href="/updateproject/{{ p.id }}">Update Project</a>
-	<hr>
-
 
 </body>
 

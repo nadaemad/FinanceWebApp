@@ -1,0 +1,14 @@
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+	<html lang="en">	
+
+	<title>Project {{ project.pname }}</title>
+
+	<h3>Gross Profit</h3>
+	<label>${{ grossprofit }}</label>
+	<br></br>
+	<h3>Gross Profit Date</h3>
+	<label>{{ grossprofit.profit_date }}</label>
+	<br></br>
+
+
+	<a href="{% url 'viewproject' project.id %}">Go Back</a>

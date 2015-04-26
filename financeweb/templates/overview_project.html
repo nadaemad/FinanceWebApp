@@ -1,0 +1,33 @@
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+	<html lang="en">	
+
+	<title>Project {{ project.pname }}</title>
+
+	<h1>{{ current_month }}'s Overview for {{ current_year }}</h1>
+
+
+	<h3>Overall Net Profit</h3>
+	<label>$ {{ net_profit }}</label>
+
+	<br></br>
+
+
+	<h3>Expenses</h3>
+
+	{% for x in expenses%}
+		{% if x.expense_date.year == current_year %}
+			{% if x.expense_date.month == cm %}
+			<label>Expense Name: {{ x.ename }} </label> 
+			<br>
+			<label>Expense Amount: ${{ x.eamount }} </label> 
+			<br>
+			<label>Expense Date: {{ x.expense_date }} </label> 
+			<br></br>
+			{% endif %}
+		{% endif %}
+	{% endfor %}
+
+
+	<a href="{% url 'viewproject' project.id %}">Go Back</a>
+
+	</html>
