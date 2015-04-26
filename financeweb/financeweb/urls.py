@@ -31,12 +31,10 @@ urlpatterns = patterns('',
     url(r'^notauser$', notauser, name='notauser'),
     url(r'^myprojects/deleteproject/(?P<p_id>\d+)/(?P<u_id>\d+)$', deleteproject, name='deleteproject'),
 
-<<<<<<< HEAD
     url(r'^resetpassword/passwordsent/$', 'django.contrib.auth.views.password_reset_done'),
     url(r'^resetpassword/$', 'financeweb.views.reset', name='reset'),
     url(r'^reset/(?P<uidb64>[0-9A-Za-z]+)/(?P<token>.+)/$', 'financeweb.views.reset_confirm', name='password_reset_confirm'),
     url(r'^reset/done/$', 'financeweb.views.success', name='success'),
-=======
     url(r'^ourapp$', ourapp, name='ourapp'),
     url(r'^ourfeatures$', ourfeatures, name='ourfeatures'),
     url(r'^myprojects/home$', home, name='home'),
@@ -46,6 +44,4 @@ urlpatterns = patterns('',
     url(r'^viewpost/viewpost/(?P<post_id>\d+)$', viewpost, name="viewpost"),
     url(r'^newpost$', makepost, name="makepost"),
 
-    url(r'^contact/', include('contact_form.urls')),
->>>>>>> 16b1cc6f25a279abe91a274b97062b12ef345317
 )
