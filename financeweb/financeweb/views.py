@@ -68,10 +68,10 @@ def newproject(request, u_id):
 	return render_to_response('newproject.html', {'u': u, 'u2': u2}, context_instance=RequestContext(request))
 
 
-def viewproject(request, post_id):
-	p = Project.objects.get(id=post_id)
+def viewproject(request, project_id):
+	p = Project.objects.get(id=project_id)
 	profit = p.prof
-	exp = Project.objects.get(id=post_id).exp.all()
+	exp = p.exp.all()
 
 	return render_to_response('viewproject.html', {'p':p, 'profit':profit, 'e':exp}, context_instance=RequestContext(request))
 
@@ -317,6 +317,17 @@ def deletepost(request,post_id,u_id):
 		post.delete()
 		return render_to_response('viewpost.html', {'posts':Post.objects.all(), 'u': u, 'u2': u2}, context_instance=RequestContext(request))
 
+
+def viewexpenses(request, project_id):
+	project = Project.objects.get(id=project_id)
+	expenses = project.exp.all()
+	return render_to_response('viewexpenses.html', {'project':project, 'expenses':expenses}, context_instance=RequestContext(request))
+
+
+def viewgrossprofit(request, project_id):
+	project = Project.objects.get(id=project_id)
+	grossprofit = project.prof
+	return render_to_response('viewgrossprofit.html', {'project':project, 'grossprofit':grossprofit}, context_instance=RequestContext(request))
 
 
 
