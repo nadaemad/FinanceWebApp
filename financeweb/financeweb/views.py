@@ -74,63 +74,122 @@ def viewproject(request, project_id):
 	p = Project.objects.get(id=project_id)
 	profit = p.prof
 	exp = p.exp.all()
-	return render_to_response('viewproject.html', {'p':p, 'profit':profit, 'e':exp}, context_instance=RequestContext(request))
+	revenues = p.revenues.all()
+	return render_to_response('viewproject.html', {'p':p, 'profit':profit, 'e':exp, 'revenues':revenues}, context_instance=RequestContext(request))
 
 
 def updateproject(request, post_id):
 	p = Project.objects.get(id=post_id)
 	profit = p.prof
-	exp = Project.objects.get(id=post_id).exp.all()
+	exp = p.exp.all()
+	revenues = p.revenues.all()
 
 	if request.POST:
-		nname = request.POST['newname']
-		p.pname = nname;
+		newname = request.POST['newname']
+		p.pname = newname;
 		p.save()
 
-		nprof = request.POST['newprofit']
-		profit.pamount = nprof;
+
+		"""getting the new profit date and updating it"""
 		profit_date = request.POST['newprofitdate']
 		profit.profit_date = profit_date;
 		profit.save()
 
 
+		"""getting the new revenues"""
+		total_revenues_amounts1 = 0 
+		for r in revenues:
+			revenue_name = request.POST['revenue_name[%d]'%r.id]
+			revenue_amount = request.POST['revenue_amount[%d]'%r.id]
+			revenue_date = request.POST['revenue_date[%d]'%r.id]   
+			r.revenue_name = revenue_name
+			r.revenue_amount = revenue_amount
+			r.revenue_date = revenue_date
+			r.save()
+			"""getting old amounts sum"""
+			total_revenues_amounts1 += int(r.revenue_amount)
+
+		#part of adding expenses men awel wegdeed#
+		revenue_names = []
+		revenue_amounts = []
+		revenue_dates = []    
+		done = False
+		i=0
+		while(not done):
+			try:
+				revenue_names.append(request.POST['revenue_names[%d]'%i])
+				revenue_amounts.append(request.POST['revenue_amounts[%d]'%i])
+				revenue_dates.append(request.POST['revenue_dates[%d]'%i])       
+				i+=1
+			except:
+				done=True
+
+
+		j=0;
+		total_revenues_amounts2 = 0  
+		while(j<i):
+			revenue = Revenue(revenue_name = revenue_names[j], revenue_amount = revenue_amounts[j], revenue_date = revenue_dates[j])
+			revenue.save()
+			p.revenues.add(revenue)
+			"""getting new amounts sum""" 
+			total_revenues_amounts2 += int(revenue.revenue_amount)
+			j+=1
+
+		p.save()
+
+
+		"""getting the new expenses"""
+		total_expenses_amounts1 = 0
 		for e in exp:
 			name = request.POST['exp_name[%d]'%e.id]
 			amount = request.POST['exp_amount[%d]'%e.id]
-			expense_date = request.POST['expense_date[%d]'%e.id]
+			expense_date = request.POST['expense_date[%d]'%e.id]    
 			e.ename = name
 			e.eamount = amount
 			e.expense_date = expense_date
 			e.save()
+			"""getting old amounts sum"""
+			total_expenses_amounts1 += int(e.eamount)
+
 
 		#part of adding expenses men awel wegdeed#
 		enames = []
 		eamounts = []
-		expense_dates = []
+		expense_dates = []        
 		done = False
 		i=0
 		while(not done):
 			try:
 				enames.append(request.POST['ename[%d]'%i])
 				eamounts.append(request.POST['eamount[%d]'%i])
-				expense_dates.append(request.POST['expense_date[%d]'%i])
+				expense_dates.append(request.POST['expense_date[%d]'%i])    
 				i+=1
 			except:
 				done=True
 
+
 		j=0;
+		total_expenses_amounts2 = 0 
 		while(j<i):
 			e = Expense(ename = enames[j], eamount = eamounts[j], expense_date = expense_dates[j])
 			e.save()
 			p.exp.add(e)
+			"""getting new amounts sum""" 
+			total_expenses_amounts2 += int(e.eamount)
 			j+=1
 
 		p.save()
 
-		return render_to_response('viewproject.html', {'p':p, 'profit':profit, 'e':exp}, context_instance=RequestContext(request))
+
+		"""updating the net profit"""
+		profit.pamount = total_revenues_amounts1 + total_revenues_amounts2 - total_expenses_amounts1 - total_expenses_amounts2;
+		profit.save()
+
+
+		return render_to_response('viewproject.html', {'p':p, 'profit':profit, 'e':exp, 'revenues':revenues}, context_instance=RequestContext(request))
 
 	else:
-		return render_to_response('updateproject.html', {'p':p, 'profit':profit, 'e':exp}, context_instance=RequestContext(request))
+		return render_to_response('updateproject.html', {'p':p, 'profit':profit, 'e':exp, 'revenues':revenues}, context_instance=RequestContext(request))
 
 
 def myprojects(request, u_id):
@@ -138,38 +197,86 @@ def myprojects(request, u_id):
 	u2 = UserProfile.objects.get(user=u)
 
 	if request.POST:
-		pname = request.POST['pname']
-		pamount = request.POST['pamount']
-		profit_date = request.POST['profit_date']
+		project_name = request.POST['project_name']
+		gross_profit_date = request.POST['profit_date']
+
+		temporary_profit = Gprofit(pamount = 0, profit_date = gross_profit_date)
+		temporary_profit.save()
+
+		project = Project(pname=project_name, prof=temporary_profit, client=u2)
+		project.save()
+
+
+		"""getting all revenues made in a new project and 
+		putting them in the project attribute -revenues-"""
+
+		revenue_names = []
+		revenue_amounts = []
+		revenue_dates = []
+		done1 = False
+		a=0
+		while(not done):
+			try:
+				revenue_names.append(request.POST['revenue_name[%d]'%a])
+				revenue_amounts.append(request.POST['revenue_amount[%d]'%a])
+				revenue_dates.append(request.POST['revenue_date[%d]'%a])
+				a+=1
+			except:
+				done1=True
+
+
+		"""creating revenues"""
+		x=0;
+		total_revenues_amounts = 0
+		while(x<a):
+			revenue = Revenue(revenue_name = revenue_names[x], revenue_amount = revenue_amounts[x], revenue_date = revenue_dates[x])
+			revenue.save()
+			total_revenues_amounts += int(revenue.revenue_amount)
+			project.revenues.add(revenue)
+			project.save()
+			x+=1
+
+		
+		"""getting all expenses made in a new project and 
+		putting them in the project attribute -expenses-"""
+
 		enames = []
 		eamounts = []
 		expense_dates = []
-		done = False
-		i=0
-		while(not done):
+		done2 = False
+		b = 0
+		while(not done2):
 			try:
-				enames.append(request.POST['ename[%d]'%i])
-				eamounts.append(request.POST['eamount[%d]'%i])
-				expense_dates.append(request.POST['expense_date[%d]'%i])
-				i+=1
+				enames.append(request.POST['ename[%d]'%b])
+				eamounts.append(request.POST['eamount[%d]'%b])
+				expense_dates.append(request.POST['expense_date[%d]'%b])
+				b+=1
 			except:
-				done=True
-		print 'enames', enames
-		print 'eamounts', eamounts
+				done2=True
 
-		gp = Gprofit(pamount = pamount, profit_date = profit_date)
-		gp.save()
-		p = Project(pname=pname, prof=gp ,client=u2)
-		p.save()
-		j=0;
-		while(j<i):
-			e = Expense(ename = enames[j], eamount = eamounts[j], expense_date = expense_dates[j])
+
+		"""creating expenses"""
+		y=0;
+		total_expenses_amounts = 0
+		while(y<b):
+			e = Expense(ename = enames[y], eamount = eamounts[y], expense_date = expense_dates[y])
 			e.save()
-			p.exp.add(e)
-			j+=1
+			total_expenses_amounts += int(e.eamount)
+			project.exp.add(e)
+			project.save()
+			y+=1
+		
 
-		p.save()
-		print Project.objects.all()
+		"""calculating gross profit and use it to create a new project"""
+
+		gross_profit_amount = total_revenues_amounts - total_expenses_amounts
+		gross_profit = Gprofit(pamount = gross_profit_amount, profit_date = gross_profit_date)
+		gross_profit.save()
+
+		project.prof = gross_profit
+		project.save()
+
+
 	return render_to_response('myprojects.html', {'projects':Project.objects.all(), 'u': u, 'u2': u2}, context_instance=RequestContext(request))
 
 
@@ -335,19 +442,36 @@ def overview_project(request, project_id):
 	project = Project.objects.get(id=project_id)
 	grossprofit = project.prof
 	expenses = project.exp.all()
+	revenues = project.revenues.all()
 
 	cm = datetime.now().month
 	current_month = calendar.month_name[cm]
 	current_year = datetime.now().year
 
-	total = 0
+
+	totalrevenues = 0
+	for r in revenues:
+		if r.revenue_date.year == current_year:
+			if r.revenue_date.month == cm: 
+				totalrevenues += r.revenue_amount
+
+
+	totalexpenses = 0
 	for x in expenses:
 		if x.expense_date.year == current_year:
 			if x.expense_date.month == cm: 
-				total += x.eamount
-	net_profit = grossprofit.pamount - total
-	return render_to_response('overview_project.html', {'project':project, 'grossprofit':grossprofit, 'expenses':expenses, 'cm':cm, 'current_month':current_month, 'current_year':current_year, 'net_profit':net_profit}, context_instance=RequestContext(request))
+				totalexpenses += x.eamount
 
+
+	net_profit = totalrevenues - totalexpenses
+
+	return render_to_response('overview_project.html', {'project':project, 'grossprofit':grossprofit, 'expenses':expenses, 'revenues':revenues, 'cm':cm, 'current_month':current_month, 'current_year':current_year, 'net_profit':net_profit}, context_instance=RequestContext(request))
+
+
+def viewrevenues(request, project_id):
+	project = Project.objects.get(id=project_id)
+	revenues = project.revenues.all()
+	return render_to_response('viewrevenues.html', {'project':project, 'revenues':revenues}, context_instance=RequestContext(request))
 
 
 

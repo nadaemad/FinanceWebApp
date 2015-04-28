@@ -1,0 +1,18 @@
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+	<html lang="en">	
+
+	<title>Project {{ project.pname }}</title>
+
+	<h3>Revenues</h3>
+
+	{% for r in revenues%}
+		<label>Revenue Name: {{ r.revenue_name }} </label> 
+		<br>
+		<label>Revenue Amount: ${{ r.revenue_amount }} </label> 
+		<br>
+		<label>Revenue Date: {{ r.revenue_date }} </label> 
+		<br></br>
+	{% endfor %}
+
+
+	<a href="{% url 'viewproject' project.id %}">Go Back</a>

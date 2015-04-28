@@ -30,14 +30,22 @@ class UserProfile(models.Model):
         return self.user.username
 
 
+class Revenue(models.Model):
+	revenue_name = models.CharField(max_length=50)
+	revenue_amount = models.IntegerField(blank=False)
+	revenue_date = models.DateField()
+	def __unicode__(self):
+		return unicode(self.revenue_name)
+
+
 class Project(models.Model):
 	pname = models.CharField(max_length=30)
 	exp = models.ManyToManyField(Expense)
 	prof = models.ForeignKey(Gprofit)
+	revenues = models.ManyToManyField(Revenue)
 	client = models.ForeignKey(UserProfile)
 	def __unicode__(self):
 		return unicode(self.pname)
-
 
 
 class Post (models.Model):
@@ -46,8 +54,14 @@ class Post (models.Model):
 	def __unicode__(self):
 		return self.title
 
+
 class comment(models.Model):
 	comment = models.TextField()
 	post = models.ForeignKey(Post)
 	def __unicode__(self):
 		return self.comment
+
+
+
+
+

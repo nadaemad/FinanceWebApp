@@ -70,16 +70,19 @@
 	<form method='post' action="{% url 'myprojects' u.id %}">{% csrf_token %}
 
 		<label>Project Name: </label> 
-		<input type="text" name="pname" placeholder="Enter a project name">*<br><br>
+		<input type="text" name="project_name" placeholder="Enter a project name">*<br><br>
 
-		<label>Gross Profit Amount: </label> 
-		<input type="number" name="pamount" placeholder="Enter your gross profit">*<br><br>
+
+		<label>Gross Profit Amount will be calculated upon your submission</label><br>
 		<label>Gross Profit Date: </label> 
 		<input type="date" name="profit_date" placeholder="Enter your profit date">*<br><br>
 
-		<button type='button' id="b1" onclick="myFunction()">Click here to add your expenses</button><br>
-		
-		<div id="hi"></div><br>
+
+		<button type='button' id="b1" onclick="myFunction1()">Click here to add your revenues</button><br>
+		<div id="revenues"></div><br>
+
+		<button type='button' id="b1" onclick="myFunction2()">Click here to add your expenses</button><br>
+		<div id="expenses"></div><br>
 
 		<hr>
 		
@@ -90,35 +93,37 @@
 
 
 <script>
-	var index = 0;
-	function myFunction() {
+	var i = 0;
+	i.name = "revenues_counter";
+
+	function myFunction1() {
 
 		var label1 = document.createElement("label");
-		var ltext1 = document.createTextNode("Expense Name:");
+		var ltext1 = document.createTextNode("Revenue Name:");
 		label1.appendChild(ltext1);
 
 		var textbox1 = document.createElement("input");
-		textbox1.name = "ename["+(index)+"]";
+		textbox1.name = "revenue_name["+(i)+"]";
 
 		var label2 = document.createElement("label");
 		var ltext2 = document.createTextNode("Amount:");
 		label2.appendChild(ltext2);
 
 		var textbox2 = document.createElement("input");
-		textbox2.name = "eamount["+(index)+"]";
+		textbox2.name = "revenue_amount["+(i)+"]";
 
 		var label3 = document.createElement("label");
 		var ltext3 = document.createTextNode("Date:");
 		label3.appendChild(ltext3);
 
-		var textbox3 = document.createElement("date");
-		textbox3.name = "expense_date["+(index)+"]";
+		var textbox3 = document.createElement("input");
+		textbox3.name = "revenue_date["+(i)+"]";
 
 		var line = document.createElement("br")
 
-		var element = document.getElementById("hi");
+		var element = document.getElementById("revenues");
 
-		index++;
+		i++;
 
 		element.appendChild(label1);
 		element.appendChild(textbox1);
@@ -130,7 +135,51 @@
 		
 		
 	}
+
+	var y = 0;
+
+	function myFunction2() {
+
+		var label1 = document.createElement("label");
+		var ltext1 = document.createTextNode("Expense Name:");
+		label1.appendChild(ltext1);
+
+		var textbox1 = document.createElement("input");
+		textbox1.name = "ename["+(y)+"]";
+
+		var label2 = document.createElement("label");
+		var ltext2 = document.createTextNode("Amount:");
+		label2.appendChild(ltext2);
+
+		var textbox2 = document.createElement("input");
+		textbox2.name = "eamount["+(y)+"]";
+
+		var label3 = document.createElement("label");
+		var ltext3 = document.createTextNode("Date:");
+		label3.appendChild(ltext3);
+
+		var textbox3 = document.createElement("input");
+		textbox3.name = "expense_date["+(y)+"]";
+
+		var line = document.createElement("br")
+
+		var element = document.getElementById("expenses");
+
+		y++;
+
+		element.appendChild(label1);
+		element.appendChild(textbox1);
+		element.appendChild(label2);
+		element.appendChild(textbox2);
+		element.appendChild(label3);
+		element.appendChild(textbox3);
+		element.appendChild(line);	
+
+	}
+
 	</script>
+
+
 
 </body>
 
