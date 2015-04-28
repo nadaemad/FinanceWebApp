@@ -3,16 +3,32 @@
 
 	<title>Project {{ project.pname }}</title>
 
-	<h1>{{ current_month }}'s Overview for {{ current_year }}</h1>
+	<h1>Overview for {{ cm }}, {{ current_year }}</h1>
 
 
-	<h3>Overall Net Profit</h3>
+	<h3>April's Net Profit</h3>
 	<label>$ {{ net_profit }}</label>
 
 	<br></br>
 
 
-	<h3>Expenses</h3>
+	<h3>April's Revenues</h3>
+
+	{% for r in revenues%}
+		{% if r.revenue_date.year == current_year %}
+			{% if r.revenue_date.month == cm %}
+			<label>Revenue Name: {{ r.revenue_name }} </label> 
+			<br>
+			<label>Revenue Amount: ${{ r.revenue_amount }} </label> 
+			<br>
+			<label>Revenue Date: {{ r.revenue_date }} </label> 
+			<br></br>
+			{% endif %}
+		{% endif %}
+	{% endfor %}
+
+
+	<h3>April's Expenses</h3>
 
 	{% for x in expenses%}
 		{% if x.expense_date.year == current_year %}

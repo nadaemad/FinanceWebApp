@@ -78,12 +78,36 @@
 	<br></br>
 
 	<h3>Gross Profit</h3>
-		<label class="labels">Project Profit $</label>
-		<input type='text' value='{{ profit }}' name='newprofit'/>
+		<label class="labels">Gross Profit will be updated upon your submission</label>
 		<br></br>
 		<label class="labels">Profit Date</label>
-		<input type='text' value='{{ profit.profit_date }}' name='newprofitdate'/>
+		<input type='date' value='{{ profit.profit_date }}' name='newprofitdate'/>
 	<br></br>
+
+
+	<h3>Revenues</h3>
+	{% for r in revenues%}
+		<label class="labels">Revenue Name </label> 
+		<input type='text' value='{{ r.revenue_name }}' name='revenue_name[{{r.id}}]'/>
+		<br>
+
+		<label class="labels">Revenue Amount $</label> 
+		<input type='text' value='{{ r.revenue_amount }}' name='revenue_amount[{{r.id}}]'/>
+		<br>
+
+		<label class="labels">Revenue Date</label> 
+		<input type='date' value='{{ r.revenue_date }}' name='revenue_date[{{r.id}}]'/>
+		<br></br>
+	
+	{% endfor %}
+
+	<br>
+
+
+	<button type='button' id="b1" onclick="addrevenue()">Add a New Revenue</button><br></br>
+	<div id="revenues"></div><br>
+
+	<hr>
 
 	
 
@@ -95,10 +119,10 @@
 
 		<label class="labels">Expense Amount $</label> 
 		<input type='text' value='{{ x.eamount }}' name='exp_amount[{{x.id}}]'/>
-		<br></br>
+		<br>
 
 		<label class="labels">Expense Date</label> 
-		<input type='text' value='{{ x.expense_date }}' name='expense_date[{{x.id}}]'/>
+		<input type='date' value='{{ x.expense_date }}' name='expense_date[{{x.id}}]'/>
 		<br></br>
 	
 	{% endfor %}
@@ -107,7 +131,7 @@
 
 
 	<button type='button' id="b1" onclick="addexpense()">Add a New Expense</button><br></br>
-	<div id="hi"></div><br>
+	<div id="expenses"></div><br>
 
 	<hr>
 
@@ -120,7 +144,7 @@
 
 	<script>
 
-	var index = 0;
+	var i = 0;
 	function addexpense() {
 
 		var label1 = document.createElement("label");
@@ -129,27 +153,67 @@
 		label1.appendChild(ltext1);
 
 		var textbox1 = document.createElement("input");
-		textbox1.name = "ename["+(index)+"]";
+		textbox1.name = "ename["+(i)+"]";
 
 		var label2 = document.createElement("label");
-		var ltext2 = document.createTextNode("Amount:");
+		var ltext2 = document.createTextNode("Expense Amount:");
 		label2.appendChild(ltext2);
 
 		var textbox2 = document.createElement("input");
-		textbox2.name = "eamount["+(index)+"]";
+		textbox2.name = "eamount["+(i)+"]";
 
 		var label3 = document.createElement("label");
-		var ltext3 = document.createTextNode("Date:");
+		var ltext3 = document.createTextNode("Expense Date:");
 		label3.appendChild(ltext3);
 
 		var textbox3 = document.createElement("input");
-		textbox3.name = "expense_date["+(index)+"]";
+		textbox3.name = "expense_date["+(i)+"]";
 
 		var line = document.createElement("br")
 
-		var element = document.getElementById("hi");
+		var element = document.getElementById("expenses");
 
-		index++;
+		i++;
+
+		element.appendChild(label1);
+		element.appendChild(textbox1);
+		element.appendChild(label2);
+		element.appendChild(textbox2);
+		element.appendChild(label3);
+		element.appendChild(textbox3);
+		element.appendChild(line);		
+	}
+
+	var j = 0;
+	function addrevenue() {
+
+		var label1 = document.createElement("label");
+		var ltext1 = document.createTextNode("Revenue Name:");
+		
+		label1.appendChild(ltext1);
+
+		var textbox1 = document.createElement("input");
+		textbox1.name = "revenue_names["+(j)+"]";
+
+		var label2 = document.createElement("label");
+		var ltext2 = document.createTextNode("Revenue Amount:");
+		label2.appendChild(ltext2);
+
+		var textbox2 = document.createElement("input");
+		textbox2.name = "revenue_amounts["+(j)+"]";
+
+		var label3 = document.createElement("label");
+		var ltext3 = document.createTextNode("Revenue Date:");
+		label3.appendChild(ltext3);
+
+		var textbox3 = document.createElement("input");
+		textbox3.name = "revenue_dates["+(j)+"]";
+
+		var line = document.createElement("br")
+
+		var element = document.getElementById("revenues");
+
+		j++;
 
 		element.appendChild(label1);
 		element.appendChild(textbox1);
