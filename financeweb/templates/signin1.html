@@ -7,13 +7,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Finance Web Application | Account </title>
-	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<title>Finance Web Application | Sign In </title>
+	<link href="/media/css/style.css" rel="stylesheet" type="text/css" media="all" />
 	<!--fonts-->
 		<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>	
 	<!--//fonts-->
-		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="/media/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 	<!-- for-mobile-apps -->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -22,11 +22,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<!-- //for-mobile-apps -->
 	<!-- js -->
-		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="/media/js/jquery.min.js"></script>
 	<!-- js -->
 	<!-- start-smooth-scrolling -->
-		<script type="text/javascript" src="js/move-top.js"></script>
-		<script type="text/javascript" src="js/easing.js"></script>
+		<script type="text/javascript" src="/media/js/move-top.js"></script>
+		<script type="text/javascript" src="/media/js/easing.js"></script>
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
 				$(".scroll").click(function(event){		
@@ -43,17 +43,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="banner pg-head">
 	<div class="container">
 		<div class="logo head">
-			<a href="index.html"><img src="images/2.jpg" alt=""/></a>
+			<a href="{% url 'home1' %}"><img src="/media/images/2.jpg" alt=""/></a>
 		</div>
 		<div class="navigation nv-hd">
-				<span class="menu"><img src="images/menu.png" alt=""/></span>
+				<span class="menu"><img src="/media/images/menu.png" alt=""/></span>
 				<ul class="nav1 nl">
-					<li><a href="about.html">ABOUT</a></li>
-					<li><a href="services.html">SERVICES</a></li>
-					<li><a href="portfolio.html">PORTFOLIO</a></li>
+					<li><a href="{% url 'about1' %}">ABOUT</a></li>
+					<li><a href="{% url 'services1' %}">FEATURES</a></li>
+					<li><a href="{% url 'portfolio1' %}">PORTFOLIO</a></li>
 					<li><a href="blog.html">BLOG</a></li>	
-					<li><a href="user_logout">SIGN OUT</a></li>
-					<li><a class="active" href="contact.html">CONTACT</a></li>
+					<li><a href="{% url 'register1' %}">REGISTER</a></li>
+					<li><a href="contact.html">CONTACT</a></li>
 				</ul>
 				<!-- script for menu -->
 					<script> 
@@ -72,30 +72,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- contact-page -->
 <div class="contact">
 	<div class="container">
-
 		<div class="contact-form">
+
 			<div class="contact-info">
-				<h2>ACCOUNT <span> DETAILS</span></h2>
+			<h2>Fill in <span> the blanks</span></h2>
 			</div>
-			
+
+			<form method='post' action="user_login1">{% csrf_token %}
 				<div class="contact-left">
-					<label> First Name </label>
-					<input type="text" value="{{ user.first_name }}" disabled>
-					<label> Last Name </label>
-					<input type="text" value= "{{ user.last_name }}" disabled>
-					<label> Company Name </label>
-					<input type="text" value= "{{ u2.companyname }}" disabled>
-					<label> Username </label>
-					<input type="text" value= "{{ user.username }}" disabled>
-					<label> Email </label>
-					<input type="text" value= "{{ user.email }}" disabled>
-					<label> Password </label>
-					<input type="text" value= "********" disabled>
+					<input name="username" type="text" placeholder="Username" required>
+					<input name="password" type="text" placeholder="Password" required>
 				</div>
 				<div class="clearfix"></div>
-			
-			<div class="view"><a href="{% url 'update_myaccount' user.id %}" class="hvr-shutter-in-vertical button">UPDATE</a></div>
-		
+				<input type="submit" value="SIGN IN">
+			</form>
 		</div>
 	</div>
 </div>

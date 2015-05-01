@@ -60,13 +60,26 @@ def myaccount(request, u_id):
 	return render_to_response('myaccount.html', {'u': request.user, 'u2': request.user.user_profile}, context_instance=RequestContext(request))   
 
 
-def home(request):
+def home1(request):
 	#if request.POST:
 		#sign up for the user
-	return render_to_response('index.html', {}, context_instance=RequestContext(request))
+	return render_to_response('home1.html', {}, context_instance=RequestContext(request))
 
-def signin(request):
-	return render_to_response('signin.html', {}, context_instance=RequestContext(request))
+
+def signin1(request):
+	return render_to_response('signin1.html', {}, context_instance=RequestContext(request))
+
+
+def about1(request):
+	return render_to_response('about1.html', {}, context_instance=RequestContext(request))
+
+
+def services1(request):
+	return render_to_response('services1.html', {}, context_instance=RequestContext(request))
+
+
+def portfolio1(request):
+	return render_to_response('portfolio1.html', {}, context_instance=RequestContext(request))
 
 
 def myaccount1(request, u_id):
@@ -103,21 +116,18 @@ def update_myaccount(request, u_id):
 	return render_to_response('update_myaccount.html', {'user': user, 'u2': u2}, context_instance=RequestContext(request)) 
 
 
-def new_project(request, u_id):
-	user = User.objects.filter(id=u_id)
-	u2 = UserProfile.objects.filter(user=user)
-	return render_to_response('new_project.html', {'user': user, 'u2': u2}, context_instance=RequestContext(request))
+def newproject1(request, u_id):
+	return render_to_response('newproject1.html', {'u': request.user, 'u2': request.user.user_profile}, context_instance=RequestContext(request))
 
 
-def displayproject(request, p_id):
-	u = User.objects.get(id=u_id)
-	u2 = UserProfile.objects.get(user=u)
-	return render_to_response('displayproject.html', {'projects':Project.objects.all(), 'user': u, 'u2': u2}, context_instance=RequestContext(request))
+def displayproject1(request, p_id):
+	project = Project.objects.get(id=p_id)
+	return render_to_response('displayproject1.html', {'project':project}, context_instance=RequestContext(request))
 
 
-def allprojects(request, u_id):
-	u = User.objects.filter(id=u_id)
-	u2 = UserProfile.objects.filter(user=u)
+def allprojects1(request, u_id):
+	u = request.user
+	u2 = u.user_profile
 
 	if request.POST:
 		project_name = request.POST['project_name']
@@ -138,7 +148,7 @@ def allprojects(request, u_id):
 		revenue_dates = []
 		done1 = False
 		a=0
-		while(not done):
+		while(not done1):
 			try:
 				revenue_names.append(request.POST['revenue_name[%d]'%a])
 				revenue_amounts.append(request.POST['revenue_amount[%d]'%a])
@@ -200,7 +210,7 @@ def allprojects(request, u_id):
 		project.save()
 
 
-	return render_to_response('allprojects.html', {'projects':Project.objects.all(), 'u': u, 'u2': u2}, context_instance=RequestContext(request))
+	return render_to_response('allprojects1.html', {'projects':Project.objects.all(), 'u': u, 'u2': u2}, context_instance=RequestContext(request))
 
 
 def newproject(request, u_id):
@@ -467,7 +477,7 @@ def register(request):
             context)
 
 
-def user_login(request):
+def user_login1(request):
 
     context = RequestContext(request)
     if request.method == 'POST':
@@ -479,14 +489,14 @@ def user_login(request):
             if user.is_active:
                 login(request, user)
                 u2 = UserProfile.objects.filter(user=user)
-                return render_to_response('index.html', {'user':user, 'user2':u2}, context)
+                return render_to_response('home1.html', {'user':user, 'user2':u2}, context)
             else:
                 return HttpResponse("Your financeweb account is disabled.")
         else:
             print "Invalid login details: {0}, {1}".format(username, password)
             return HttpResponse("Invalid login details supplied.")
     else:
-        return render_to_response('signin.html', {}, context)
+        return render_to_response('signin1.html', {}, context)
 
 
 @login_required
@@ -496,12 +506,12 @@ def restricted(request):
 
 # Use the login_required() decorator to ensure only those logged in can access the view.
 @login_required
-def user_logout(request):
+def user_logout1(request):
     # Since we know the user is logged in, we can now just log them out.
     logout(request)
 
     # Take the user back to the homepage.
-    return HttpResponseRedirect('index')
+    return HttpResponseRedirect('home1')
 
 def viewallposts(request):
 	if request.POST:
@@ -537,22 +547,15 @@ def makepost(request):
 		 	'posts':Post.objects.all(),
 		 	}, context_instance=RequestContext(request))
 
-def deleteproject(request,p_id,u_id):
-	u = User.objects.get(id=u_id)
-	u2 = UserProfile.objects.get(user=u)
+
+def deleteproject1(request,p_id,u_id):
+	u = request.user
+	u2 = u.user_profile
 	
 	if request.POST:
-		project= Project.objects.get(id=p_id)
+		project = Project.objects.get(id=p_id)
 		project.delete()
-		return render_to_response('myprojects.html', {'projects':Project.objects.all(), 'u': u, 'u2': u2}, context_instance=RequestContext(request))
-
-
-def ourapp(request):
-	return render_to_response('ourapp.html', {}, context_instance=RequestContext(request))
-
-
-def ourfeatures(request):
-	return render_to_response('ourfeatures.html', {}, context_instance=RequestContext(request))
+		return render_to_response('allprojects1.html', {'projects':Project.objects.all(), 'u': u, 'u2': u2}, context_instance=RequestContext(request))
 
 
 def deletepost(request,post_id,u_id):
@@ -565,20 +568,20 @@ def deletepost(request,post_id,u_id):
 		return render_to_response('viewpost.html', {'posts':Post.objects.all(), 'u': u, 'u2': u2}, context_instance=RequestContext(request))
 
 
-def viewexpenses(request, project_id):
-	project = Project.objects.get(id=project_id)
+def viewexpenses1(request, p_id):
+	project = Project.objects.get(id=p_id)
 	expenses = project.exp.all()
-	return render_to_response('viewexpenses.html', {'project':project, 'expenses':expenses}, context_instance=RequestContext(request))
+	return render_to_response('viewexpenses1.html', {'project':project, 'expenses':expenses}, context_instance=RequestContext(request))
 
 
-def viewgrossprofit(request, project_id):
-	project = Project.objects.get(id=project_id)
+def viewgrossprofit1(request, p_id):
+	project = Project.objects.get(id=p_id)
 	grossprofit = project.prof
-	return render_to_response('viewgrossprofit.html', {'project':project, 'grossprofit':grossprofit}, context_instance=RequestContext(request))
+	return render_to_response('viewgrossprofit1.html', {'project':project, 'grossprofit':grossprofit}, context_instance=RequestContext(request))
 
 
-def overview_project(request, project_id):
-	project = Project.objects.get(id=project_id)
+def overview_project1(request, p_id):
+	project = Project.objects.get(id=p_id)
 	grossprofit = project.prof
 	expenses = project.exp.all()
 	revenues = project.revenues.all()
@@ -604,13 +607,13 @@ def overview_project(request, project_id):
 
 	net_profit = totalrevenues - totalexpenses
 
-	return render_to_response('overview_project.html', {'project':project, 'grossprofit':grossprofit, 'expenses':expenses, 'revenues':revenues, 'cm':cm, 'current_month':current_month, 'current_year':current_year, 'net_profit':net_profit}, context_instance=RequestContext(request))
+	return render_to_response('overview_project1.html', {'user': request.user, 'project':project, 'grossprofit':grossprofit, 'expenses':expenses, 'revenues':revenues, 'cm':cm, 'current_month':current_month, 'current_year':current_year, 'net_profit':net_profit}, context_instance=RequestContext(request))
 
 
-def viewrevenues(request, project_id):
-	project = Project.objects.get(id=project_id)
+def viewrevenues1(request, p_id):
+	project = Project.objects.get(id=p_id)
 	revenues = project.revenues.all()
-	return render_to_response('viewrevenues.html', {'project':project, 'revenues':revenues}, context_instance=RequestContext(request))
+	return render_to_response('viewrevenues1.html', {'project':project, 'revenues':revenues}, context_instance=RequestContext(request))
 
 
 

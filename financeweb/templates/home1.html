@@ -45,14 +45,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="banner">
 	<div class="container">
 		<div class="logo">
-			<a href="index.html"><img src="/media/images/2.jpg" alt=""/></a>
+			<a href="{% url 'home1' %}"><img src="/media/images/2.jpg" alt=""/></a>
 		</div>
 		<div class="navigation">
 				<span class="menu"><img src="/media/images/menu.png" alt=""/></span>
 				<ul class="nav1">
-					<li><a href="about.html">ABOUT</a></li>
-					<li><a href="services.html">FEATURES</a></li>
-					<li><a href="portfolio.html">PORTFOLIO</a></li>
+					<li><a href="{% url 'about1' %}">ABOUT</a></li>
+					<li><a href="{% url 'services1' %}">FEATURES</a></li>
+					<li><a href="{% url 'portfolio1' %}">PORTFOLIO</a></li>
 					<li><a href="blog.html">BLOG</a></li>	
 					{% if user.is_authenticated %}
 					<li><a href="{% url 'myaccount1' user.id %}">ACCOUNT</a></li>
@@ -77,14 +77,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<p>Finance Web Application</p>
 
 			{% if user.is_authenticated %}
-			<div class="view"><a href="user_logout" class="hvr-shutter-in-vertical button">SIGN OUT</a></div>
-			<div class="view"><a href="{% url 'allprojects' user.id %}" class="hvr-shutter-in-vertical button">VIEW PROJECTS</a></div>
+			<div class="view"><a href="{% url 'user_logout1' %}" class="hvr-shutter-in-vertical button">SIGN OUT</a></div>
+			<div class="view"><a href="{% url 'allprojects1' user.id %}" class="hvr-shutter-in-vertical button">VIEW PROJECTS</a></div>
 			{% else %}
-			<div class="view"><a href="user_login" class="hvr-shutter-in-vertical button">SIGN IN</a></div>
+			<div class="view"><a href="{% url 'user_login1' %}" class="hvr-shutter-in-vertical button">SIGN IN</a></div>
 			{% endif %}
-
-
-
 
 
 		</div>

@@ -852,6 +852,17 @@ min-height:200px !important;
 	outline: none;
 	border: 1px solid #e8e8e8;
 	}
+
+.contact-left input[type="date"]{
+	width: 93%;
+	color: #5d9cec;
+	margin: 0 23px 23px 0;
+	font-size:16px;
+	padding: 12px 10px;
+	outline: none;
+	border: 1px solid #e8e8e8;
+	}
+
 .contact-right textarea{
 	width: 100%;
 	color: #5d9cec;
@@ -1486,7 +1497,7 @@ display:block;
 }
 .blog-sidebar{
 	width:20%;
-	float:right;
+	float:left;
 }
 ul.category{
 	padding:0;
@@ -1951,7 +1962,7 @@ padding:100px 0;
 	.project-grid h3,.get-left h3,.get-left p,.get-right input[type="text"] {
 	  font-size: 16px;
 	  }
-	.project-grid p,#filters li span,.contact-left input[type="text"],.contact-right textarea,.contact-form input[type=submit],.error-info p:nth-child(2),.error-info p:nth-child(3),.home-page a ,.leave-form textarea,.leave-form input[type=submit],.leave-form input[type="text"],.blog-post p:nth-child(5),.blog-post p,.post-details p,.more,ul.page-list li a,ul.category li a,.special-grid ul li a,.services-grid p,.readmore a,.special-right p,.about-right p,.staff-grid p:nth-child(2),.slider-img p,.about-right a,.olia-left ul li:nth-child(2),.olia-left p,.olia-right p,.footer p,.about-right p:nth-child(2){
+	.project-grid p,#filters li span,.contact-left input[type="text"], .contact-left input[type="date"],.contact-right textarea,.contact-form input[type=submit],.error-info p:nth-child(2),.error-info p:nth-child(3),.home-page a ,.leave-form textarea,.leave-form input[type=submit],.leave-form input[type="text"],.blog-post p:nth-child(5),.blog-post p,.post-details p,.more,ul.page-list li a,ul.category li a,.special-grid ul li a,.services-grid p,.readmore a,.special-right p,.about-right p,.staff-grid p:nth-child(2),.slider-img p,.about-right a,.olia-left ul li:nth-child(2),.olia-left p,.olia-right p,.footer p,.about-right p:nth-child(2){
 	  font-size: 14px;
 	}
 	.col-md-3.project-grid {
@@ -2147,6 +2158,9 @@ padding:100px 0;
 	.contact-left input[type="text"] {
 	  margin: 0px 0px 23px 0;
 	  }
+	.contact-left input[type="date"] {
+	  margin: 0px 0px 23px 0;
+	  }
 	.contact-form input[type=submit] {
 	  padding: 8px 24px;
 	  }
@@ -2220,7 +2234,7 @@ padding:100px 0;
 	.project-grid h3, .get-left h3, .get-left p, .get-right input[type="text"] {
 	  font-size: 13px;
 	}
-	.project-grid p,.get-right input[type=submit],#filters li span,.contact-left input[type="text"],.contact-right textarea,.contact-form input[type=submit],.error-info p:nth-child(2),.error-info p:nth-child(3),.home-page a ,.leave-form textarea,.leave-form input[type=submit],.leave-form input[type="text"],.blog-post p:nth-child(5),.blog-post p,.post-details p,.more,ul.page-list li a,ul.category li a,.special-grid ul li a,.services-grid p,.readmore a,.special-right p,.about-right p,.staff-grid p:nth-child(2),.slider-img p,.about-right a,.olia-left ul li:nth-child(2),.olia-left p,.olia-right p,.footer p,.about-right p:nth-child(2){
+	.project-grid p,.get-right input[type=submit],#filters li span,.contact-left input[type="text"],.contact-left input[type="date"],.contact-right textarea,.contact-form input[type=submit],.error-info p:nth-child(2),.error-info p:nth-child(3),.home-page a ,.leave-form textarea,.leave-form input[type=submit],.leave-form input[type="text"],.blog-post p:nth-child(5),.blog-post p,.post-details p,.more,ul.page-list li a,ul.category li a,.special-grid ul li a,.services-grid p,.readmore a,.special-right p,.about-right p,.staff-grid p:nth-child(2),.slider-img p,.about-right a,.olia-left ul li:nth-child(2),.olia-left p,.olia-right p,.footer p,.about-right p:nth-child(2){
 		font-size: 13px;
 		}
 	.bottom-header p, .project-header p, .about-info p, .portfolio-info p, .gallery p, .recent p {
@@ -2620,6 +2634,9 @@ padding:100px 0;
 	.contact-left input[type="text"] {
 	  margin: 0px 0px 16px 0;
 	}
+	.contact-left input[type="date"] {
+	  margin: 0px 0px 16px 0;
+	}
 	.contact-left {
 	  width: 43%;
 	}
@@ -2627,6 +2644,9 @@ padding:100px 0;
 	  width: 57%;
 	}
 	.contact-left input[type="text"] {
+	  padding: 9px 10px;
+	  }
+	.contact-left input[type="date"] {
 	  padding: 9px 10px;
 	  }
 	.contact-right textarea {
@@ -2885,6 +2905,9 @@ padding:100px 0;
 	  width: 100%;
 	}
 	.contact-left input[type="text"] {
+	  width: 100%;
+	  }
+	.contact-left input[type="date"] {
 	  width: 100%;
 	  }
 	ul.category li {

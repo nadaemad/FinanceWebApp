@@ -1,0 +1,181 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Finance Web Application | Project Overview </title>
+	<link href="/media/css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<!--fonts-->
+		<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>	
+	<!--//fonts-->
+		<link href="/media/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<!-- for-mobile-apps -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="Avalon Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+		Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!-- //for-mobile-apps -->
+	<!-- js -->
+		<script type="text/javascript" src="/media/js/jquery.min.js"></script>
+	<!-- js -->
+	<!-- start-smooth-scrolling -->
+		<script type="text/javascript" src="/media/js/move-top.js"></script>
+		<script type="text/javascript" src="/media/js/easing.js"></script>
+		<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){		
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+				});
+			});
+		</script>
+	<!-- start-smooth-scrolling -->
+
+</head>
+<body>
+<!-- banner -->
+<div class="banner pg-head">
+	<div class="container">
+		<div class="logo head">
+			<a href="index.html"><img src="/media/images/2.jpg" alt=""/></a>
+		</div>
+		<div class="navigation nv-hd">
+				<span class="menu"><img src="/media/images/menu.png" alt=""/></span>
+				<ul class="nav1 nl">
+					<li><a href="about.html">ABOUT</a></li>
+					<li><a href="services.html">SERVICES</a></li>
+					<li><a href="portfolio.html">PORTFOLIO</a></li>
+					<li><a href="blog.html">BLOG</a></li>	
+					{% if user.is_authenticated %}
+					<li><a href="user_logout">SIGN OUT</a></li>
+					{% else %}
+					<li><a href="register1">REGISTER</a></li>
+					{% endif %}
+					<li><a href="contact.html">CONTACT</a></li>
+				</ul>
+				<!-- script for menu -->
+					<script> 
+						$( "span.menu" ).click(function() {
+						$( "ul.nav1" ).slideToggle( 300, function() {
+						 // Animation complete.
+						});
+						});
+					</script>
+				<!-- //script for menu -->
+			
+		</div>
+	</div>
+</div>
+<!-- //banner -->
+<!-- projects -->
+
+<div class="services">
+	<div class="container">
+		<div class="services-info">
+			<a href="{% url 'allprojects1' user.id %}"><h2>YOUR <span>PROJECTS</span></h2></a>
+			<p>
+		</div>
+
+			<div class="blog-sidebar">
+				<h4>{{ project.pname }}</h4>
+				<ul class="category">
+					<li><a href="{% url 'overview_project1' project.id %}">Overview</a></li>
+					<li><a href="{% url 'viewgrossprofit1' project.id %}">Net Profit</a></li>
+					<li><a href="{% url 'viewrevenues1' project.id %}">Revenues</a></li>
+					<li><a href="{% url 'viewexpenses1' project.id %}">Expenses</a></li>
+					<li><a href="#">Milestones</a></li>
+					<li><a href="#">Statistics</a></li>
+					<li><a href="#">Update</a></li>
+				</ul>
+			</div>
+
+
+
+			<div class="contact">
+			<div class="container">
+
+			<div class="contact-form">
+			<div class="contact-info">
+				<h2>Overview for <span> {{ cm }}, {{ current_year }}</span></h2>
+			</div>
+			
+				<div class="contact-left">
+					<label> {{ current_month }}'s Net Profit </label>
+					<input type="text" value="{{ net_profit }}" disabled>
+
+					<label> {{ current_month }}'s Revenues </label>
+
+						{% for r in revenues%}
+							{% if r.revenue_date.year == current_year %}
+								{% if r.revenue_date.month == cm %}
+									<label>Revenue Name: {{ r.revenue_name }} </label> 
+									<br>
+									<label>Revenue Amount: ${{ r.revenue_amount }} </label> 
+									<br>
+									<label>Revenue Date: {{ r.revenue_date }} </label> 
+									<br></br>
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+
+					<br></br>
+					
+					<label> {{ current_month }}'s Expenses</label>
+						
+						{% for x in expenses%}
+							{% if x.expense_date.year == current_year %}
+								{% if x.expense_date.month == cm %}
+									<label>Expense Name: {{ x.ename }} </label> 
+									<br>
+									<label>Expense Amount: ${{ x.eamount }} </label> 
+									<br>
+									<label>Expense Date: {{ x.expense_date }} </label> 
+									<br></br>
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+
+
+
+				</div>
+				<div class="clearfix"></div>
+		
+			</div>
+			</div>
+			</div>
+
+
+	</div>
+</div>
+
+
+<!-- footer -->
+<div class="footer">
+	<div class="container">
+		<p>Copyright &copy; 2015 Finance Web Application.</p>
+	</div>
+</div>
+<!-- //footer -->
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

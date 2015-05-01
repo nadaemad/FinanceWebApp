@@ -7,13 +7,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Finance Web Application | Account </title>
-	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<title>Finance Web Application | Project Net Profit </title>
+	<link href="/media/css/style.css" rel="stylesheet" type="text/css" media="all" />
 	<!--fonts-->
 		<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>	
 	<!--//fonts-->
-		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="/media/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 	<!-- for-mobile-apps -->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -22,11 +22,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<!-- //for-mobile-apps -->
 	<!-- js -->
-		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="/media/js/jquery.min.js"></script>
 	<!-- js -->
 	<!-- start-smooth-scrolling -->
-		<script type="text/javascript" src="js/move-top.js"></script>
-		<script type="text/javascript" src="js/easing.js"></script>
+		<script type="text/javascript" src="/media/js/move-top.js"></script>
+		<script type="text/javascript" src="/media/js/easing.js"></script>
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
 				$(".scroll").click(function(event){		
@@ -43,17 +43,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="banner pg-head">
 	<div class="container">
 		<div class="logo head">
-			<a href="index.html"><img src="images/2.jpg" alt=""/></a>
+			<a href="index.html"><img src="/media/images/2.jpg" alt=""/></a>
 		</div>
 		<div class="navigation nv-hd">
-				<span class="menu"><img src="images/menu.png" alt=""/></span>
+				<span class="menu"><img src="/media/images/menu.png" alt=""/></span>
 				<ul class="nav1 nl">
 					<li><a href="about.html">ABOUT</a></li>
 					<li><a href="services.html">SERVICES</a></li>
 					<li><a href="portfolio.html">PORTFOLIO</a></li>
 					<li><a href="blog.html">BLOG</a></li>	
+					{% if user.is_authenticated %}
 					<li><a href="user_logout">SIGN OUT</a></li>
-					<li><a class="active" href="contact.html">CONTACT</a></li>
+					{% else %}
+					<li><a href="register1">REGISTER</a></li>
+					{% endif %}
+					<li><a href="contact.html">CONTACT</a></li>
 				</ul>
 				<!-- script for menu -->
 					<script> 
@@ -69,37 +73,57 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</div>
 </div>
 <!-- //banner -->
-<!-- contact-page -->
-<div class="contact">
-	<div class="container">
+<!-- projects -->
 
-		<div class="contact-form">
+<div class="services">
+	<div class="container">
+		<div class="services-info">
+			<a href="{% url 'allprojects1' user.id %}"><h2>YOUR <span>PROJECTS</span></h2></a>
+			<p>
+		</div>
+
+			<div class="blog-sidebar">
+				<h4>{{ project.pname }}</h4>
+				<ul class="category">
+					<li><a href="{% url 'overview_project1' project.id %}">Overview</a></li>
+					<li><a href="{% url 'viewgrossprofit1' project.id %}">Net Profit</a></li>
+					<li><a href="{% url 'viewrevenues1' project.id %}">Revenues</a></li>
+					<li><a href="{% url 'viewexpenses1' project.id %}">Expenses</a></li>
+					<li><a href="#">Milestones</a></li>
+					<li><a href="#">Statistics</a></li>
+					<li><a href="#">Update</a></li>
+				</ul>
+			</div>
+
+
+
+			<div class="contact">
+			<div class="container">
+
+			<div class="contact-form">
 			<div class="contact-info">
-				<h2>ACCOUNT <span> DETAILS</span></h2>
+				<h2>Overall <span> Net Profit</span></h2>
 			</div>
 			
 				<div class="contact-left">
-					<label> First Name </label>
-					<input type="text" value="{{ user.first_name }}" disabled>
-					<label> Last Name </label>
-					<input type="text" value= "{{ user.last_name }}" disabled>
-					<label> Company Name </label>
-					<input type="text" value= "{{ u2.companyname }}" disabled>
-					<label> Username </label>
-					<input type="text" value= "{{ user.username }}" disabled>
-					<label> Email </label>
-					<input type="text" value= "{{ user.email }}" disabled>
-					<label> Password </label>
-					<input type="text" value= "********" disabled>
+					<input type="text" value="${{ grossprofit }}" disabled>
+					<br></br>
+					<label>Gross Profit Date</label>
+					<input type="text" value="{{ grossprofit.profit_date }}" disabled>
+
+
 				</div>
 				<div class="clearfix"></div>
-			
-			<div class="view"><a href="{% url 'update_myaccount' user.id %}" class="hvr-shutter-in-vertical button">UPDATE</a></div>
 		
-		</div>
+			</div>
+			</div>
+			</div>
+
+
 	</div>
 </div>
-<!-- //contact-page -->
+
+
 <!-- footer -->
 <div class="footer">
 	<div class="container">

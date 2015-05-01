@@ -19,6 +19,7 @@ import os.path
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -55,6 +56,16 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app1',
+)
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -96,12 +107,25 @@ USE_L10N = True
 USE_TZ = True
 
 
+# this was pointing to static I removed index.html and added it to templates
+# I don't know about other files
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates'),
+)
+
+# this is where you add your static directories which are refereenced by static
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-STAIC_ROOT = os.path.join(BASE_DIR,'static')
+# STATIC_ROOT = os.path.join(PROJECT_ROOT, '../static')
 STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'/static/media')
+
+# these are directly added to urls.py
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static/media')
 MEDIA_URL = '/media/'
 
 

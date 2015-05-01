@@ -7,13 +7,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Finance Web Application | Services </title>
-	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<title>Finance Web Application | Features </title>
+	<link href="/media/css/style.css" rel="stylesheet" type="text/css" media="all" />
 	<!--fonts-->
 		<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>	
 	<!--//fonts-->
-		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="/media/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 	<!-- for-mobile-apps -->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -22,11 +22,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<!-- //for-mobile-apps -->
 	<!-- js -->
-		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="/media/js/jquery.min.js"></script>
 	<!-- js -->
 	<!-- start-smooth-scrolling -->
-		<script type="text/javascript" src="js/move-top.js"></script>
-		<script type="text/javascript" src="js/easing.js"></script>
+		<script type="text/javascript" src="/media/js/move-top.js"></script>
+		<script type="text/javascript" src="/media/js/easing.js"></script>
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
 				$(".scroll").click(function(event){		
@@ -43,16 +43,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="banner pg-head">
 	<div class="container">
 		<div class="logo head">
-			<a href="index.html"><img src="images/2.jpg" alt=""/></a>
+			<a href="{% url 'home1' %}"><img src="/media/images/2.jpg" alt=""/></a>
 		</div>
 		<div class="navigation nv-hd">
-				<span class="menu"><img src="images/menu.png" alt=""/></span>
+				<span class="menu"><img src="/media/images/menu.png" alt=""/></span>
 				<ul class="nav1 nl">
-					<li><a href="about.html">ABOUT</a></li>
-					<li><a class="active" href="services.html">SERVICES</a></li>
-					<li><a href="portfolio.html">PORTFOLIO</a></li>
+					<li><a href="{% url 'about1' %}">ABOUT</a></li>
+					<li><a class="active" href="{% url 'services1' %}">FEATURES</a></li>
+					<li><a href="{% url 'portfolio1' %}">PORTFOLIO</a></li>
 					<li><a href="blog.html">BLOG</a></li>	
-					<li><a href="register.html">REGISTER</a></li>
+					{% if user.is_authenticated %}
+					<li><a href="{% url 'myaccount1' user.id %}">ACCOUNT</a></li>
+					{% else %}
+					<li><a href="{% url 'register1' %}">REGISTER</a></li>
+					{% endif %}
 					<li><a href="contact.html">CONTACT</a></li>
 				</ul>
 				<!-- script for menu -->
@@ -73,12 +77,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="services">
 	<div class="container">
 		<div class="services-info">
-			<h2>OUR <span>SERVICES</span></h2>
+			<h2>OUR <span>FEATURES</span></h2>
 			<p>
 		</div>
 		<div class="services-grids">
 			<div class="services-grid">
-				<img src="images/s1.jpg" alt=""/>
+				<img src="/media/images/s1.jpg" alt=""/>
 				<p>Track your revenues, you can have records
 				of all your revenues along with their date and
 				amounts. Statistics will be calculated as well
@@ -87,7 +91,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				entities.</p>
 			</div>
 			<div class="services-grid">
-				<img src="images/s2.jpg" alt=""/>
+				<img src="/media/images/s2.jpg" alt=""/>
 				<p>Track your expenses, you can have records
 				of all your expenses along with their date and
 				amounts. Statistics will be calculated as well
@@ -96,14 +100,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				entities.</p>
 			</div>
 			<div class="services-grid">
-				<img src="images/s3.jpg" alt=""/>
+				<img src="/media/images/s3.jpg" alt=""/>
 				<p>Track your net profit, a statistical graph
 				can be visible to show you how far your project
 				is going. You can also set milestones to reach
 				a certain target for your net profit.</p>
 			</div>
 			<div class="services-grid">
-				<img src="images/s4.jpg" alt=""/>
+				<img src="/media/images/s4.jpg" alt=""/>
 				<p>Search, Edit, or Delete older entries, you
 				can make a lot of modifications to your older 
 				entries or search in your projects by an expense

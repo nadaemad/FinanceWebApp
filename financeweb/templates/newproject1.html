@@ -79,13 +79,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="contact-info">
 				<h2>NEW <span> PROJECT</span></h2>
 			</div>
-			<form method='post' action="{% url 'allprojects' user.id %}">{% csrf_token %}
+			<form method='post' action="{% url 'allprojects1' u.id %}">{% csrf_token %}
 				<div class="contact-left">
 				<p>Please fill in the blanks. Kindly be noted that your net profit will
 				be calculated automatically upon your submission.</p>
 
 					<input type="text" name="project_name" placeholder="Project Name" required>
-					<input type="date" name="profit_date" placeholder="Net Profit Date" required>
+					<input type="text" name="profit_date" placeholder="Net Profit Date" required>
 					<br></br>
 
 
@@ -136,20 +136,25 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		textbox3.name = "revenue_date["+(i)+"]";
 
 		var line = document.createElement("br")
+		var line1 = document.createElement("br")
+		var line2 = document.createElement("br")
+		var line2 = document.createElement("br")
+
 
 		var element = document.getElementById("revenues");
 
 		i++;
 
+		element.appendChild(line);
 		element.appendChild(label1);
 		element.appendChild(textbox1);
+		element.appendChild(line1);
 		element.appendChild(label2);
 		element.appendChild(textbox2);
+		element.appendChild(line2);
 		element.appendChild(label3);
 		element.appendChild(textbox3);
-		element.appendChild(line);
-		
-		
+		element.appendChild(line3);	
 	}
 
 	var y = 0;
@@ -178,18 +183,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		textbox3.name = "expense_date["+(y)+"]";
 
 		var line = document.createElement("br")
+		var line1 = document.createElement("br")
+		var line2 = document.createElement("br")
+		var line2 = document.createElement("br")
 
 		var element = document.getElementById("expenses");
 
 		y++;
 
+		element.appendChild(line);
 		element.appendChild(label1);
 		element.appendChild(textbox1);
+		element.appendChild(line1);
 		element.appendChild(label2);
 		element.appendChild(textbox2);
+		element.appendChild(line2);
 		element.appendChild(label3);
 		element.appendChild(textbox3);
-		element.appendChild(line);	
+		element.appendChild(line3);	
 
 	}
 
