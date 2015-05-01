@@ -13,7 +13,13 @@ from django.conf import settings
 from django.contrib.auth.views import password_reset, password_reset_confirm
 from datetime import datetime
 import calendar
-
+from django.contrib import messages
+from django.contrib.messages import get_messages
+from django.core.context_processors import csrf
+from django.db.models.signals import post_save
+from notifications import notify
+from myapp.models import MyModel
+from notifications import notify
 
 def reset(request):
 	return password_reset(request, template_name='reset.html', email_template_name='reset_email.html', 
@@ -474,9 +480,65 @@ def viewrevenues(request, project_id):
 	return render_to_response('viewrevenues.html', {'project':project, 'revenues':revenues}, context_instance=RequestContext(request))
 
 
+def reminderMe(request,Reminder_id):
+
+	r =reminder.objects.get(id=Reminder_id)
+	messages.add_messages(request,settings.REMINDER_MESSAGE,"madetnsash el reminder enhrdaa")
+
+
+def reminder1(request):
+	 	return render_to_response(
+            'reminder.html', {}, context_instance=RequestContext(request))
+
+
+def reminder(request,reminder_id):
+	context = RequestContext(request)
+
+	if request.method=='POST':
+
+		Reminder = reminder.objects.get()
+ 		if form.is_valid():
+ 			remind = remind_form.save()
+ 		else:
+ 			print user_form.errors
+	else:
+
+    	 reminder = reminderForm()
+
+ 	#messages.add_message(request, messages.SUCCESS,"your reminder is add")
+ 	return render_to_response(
+            'reminder.html', {'reminder': reminder}, context_instance=RequestContext(request))
+
+
+ 	
+
+def remindNOW(request, reminder_id):
+
+	r = reminder.objects.get(id=reminder_id)
+
+	if request.POST:
+		f = reminderForm(request.POST)
+		if f.is_valid():
+			a = f.save(commit=False)
+			a.date_to_remind = timezone.now()
+			a.reminder = r
+			a.save()
+		message.success(request,r.descrpition)
+
+		notify.send(user, recipient=user, verb='you reached level 10')
+
+		notify.send(comment.user, recipient=user, verb=u'replied', action_object=comment,
+            description=comment.comment, target=comment.content_object)
+
+		notify.send(follow_instance.user, recipient=follow_instance.follow_object, verb=u'has followed you',
+            action_object=instance, description=u'', target=follow_instance.follow_object, level='success')
 
 
 
+def my_handler(sender, instance, created, **kwargs):
+    notify.send(instance, verb='was saved')
+
+post_save.connect(my_handler, sender=MyModel)
 
 
 

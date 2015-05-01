@@ -55,8 +55,23 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app1',
+    'notifications',
+
 )
 
+REMINDER_MESSAGE = 50
+
+MESSAGE_TAGS = {
+    REMINDER_MESSAGE : 'REMINDER',
+}
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
+    #'context_processors.baseurl',
+    
+)
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -114,3 +129,7 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
+
+NOTIFICATIONS_USE_JSONFIELD=True
+
+NOTIFICATIONS_SOFT_DELETE=True
