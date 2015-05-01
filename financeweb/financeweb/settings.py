@@ -33,7 +33,7 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
 ALLOWED_HOSTS = []
@@ -98,10 +98,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
-STATIC_URL = '/static/'
+
 STAIC_ROOT = os.path.join(BASE_DIR,'static')
-MEDIA_ROOT = os.path.join(BASE_DIR,'static/media')
+STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'/static/media')
 MEDIA_URL = '/media/'
+
+
 
 EMAIL_USE_TLS = True  
 EMAIL_HOST = 'smtp.gmail.com'  

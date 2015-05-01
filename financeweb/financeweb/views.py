@@ -61,7 +61,146 @@ def myaccount(request, u_id):
 
 
 def home(request):
-	return render_to_response('home.html', {}, context_instance=RequestContext(request))
+	#if request.POST:
+		#sign up for the user
+	return render_to_response('index.html', {}, context_instance=RequestContext(request))
+
+def signin(request):
+	return render_to_response('signin.html', {}, context_instance=RequestContext(request))
+
+
+def myaccount1(request, u_id):
+	user = User.objects.get(id=u_id)
+	u2 = UserProfile.objects.get(user=user)
+
+	if request.POST:
+		user.first_name = request.POST['firstname']
+		user.save()
+
+		user.last_name = request.POST['lastname']
+		user.save()
+
+		user.email = request.POST['email']
+		user.save()
+
+		u2.companyname = request.POST['companyname']
+		u2.save()
+
+		user.password = request.POST['newpassword']
+		user.save()
+
+	return render_to_response('myaccount.html', {'user': user, 'u2': u2}, context_instance=RequestContext(request))
+
+
+def register1(request):
+	return render_to_response('register1.html', {}, context_instance=RequestContext(request))
+
+
+def update_myaccount(request, u_id):
+	user = User.objects.get(id=u_id)
+	u2 = UserProfile.objects.get(user=user)
+
+	return render_to_response('update_myaccount.html', {'user': user, 'u2': u2}, context_instance=RequestContext(request)) 
+
+
+def new_project(request, u_id):
+	user = User.objects.filter(id=u_id)
+	u2 = UserProfile.objects.filter(user=user)
+	return render_to_response('new_project.html', {'user': user, 'u2': u2}, context_instance=RequestContext(request))
+
+
+def displayproject(request, p_id):
+	u = User.objects.get(id=u_id)
+	u2 = UserProfile.objects.get(user=u)
+	return render_to_response('displayproject.html', {'projects':Project.objects.all(), 'user': u, 'u2': u2}, context_instance=RequestContext(request))
+
+
+def allprojects(request, u_id):
+	u = User.objects.filter(id=u_id)
+	u2 = UserProfile.objects.filter(user=u)
+
+	if request.POST:
+		project_name = request.POST['project_name']
+		gross_profit_date = request.POST['profit_date']
+
+		temporary_profit = Gprofit(pamount = 0, profit_date = gross_profit_date)
+		temporary_profit.save()
+
+		project = Project(pname=project_name, prof=temporary_profit, client=u2)
+		project.save()
+
+
+		"""getting all revenues made in a new project and 
+		putting them in the project attribute -revenues-"""
+
+		revenue_names = []
+		revenue_amounts = []
+		revenue_dates = []
+		done1 = False
+		a=0
+		while(not done):
+			try:
+				revenue_names.append(request.POST['revenue_name[%d]'%a])
+				revenue_amounts.append(request.POST['revenue_amount[%d]'%a])
+				revenue_dates.append(request.POST['revenue_date[%d]'%a])
+				a+=1
+			except:
+				done1=True
+
+
+		"""creating revenues"""
+		x=0;
+		total_revenues_amounts = 0
+		while(x<a):
+			revenue = Revenue(revenue_name = revenue_names[x], revenue_amount = revenue_amounts[x], revenue_date = revenue_dates[x])
+			revenue.save()
+			total_revenues_amounts += int(revenue.revenue_amount)
+			project.revenues.add(revenue)
+			project.save()
+			x+=1
+
+		
+		"""getting all expenses made in a new project and 
+		putting them in the project attribute -expenses-"""
+
+		enames = []
+		eamounts = []
+		expense_dates = []
+		done2 = False
+		b = 0
+		while(not done2):
+			try:
+				enames.append(request.POST['ename[%d]'%b])
+				eamounts.append(request.POST['eamount[%d]'%b])
+				expense_dates.append(request.POST['expense_date[%d]'%b])
+				b+=1
+			except:
+				done2=True
+
+
+		"""creating expenses"""
+		y=0;
+		total_expenses_amounts = 0
+		while(y<b):
+			e = Expense(ename = enames[y], eamount = eamounts[y], expense_date = expense_dates[y])
+			e.save()
+			total_expenses_amounts += int(e.eamount)
+			project.exp.add(e)
+			project.save()
+			y+=1
+		
+
+		"""calculating gross profit and use it to create a new project"""
+
+		gross_profit_amount = total_revenues_amounts - total_expenses_amounts
+		gross_profit = Gprofit(pamount = gross_profit_amount, profit_date = gross_profit_date)
+		gross_profit.save()
+
+		project.prof = gross_profit
+		project.save()
+
+
+	return render_to_response('allprojects.html', {'projects':Project.objects.all(), 'u': u, 'u2': u2}, context_instance=RequestContext(request))
 
 
 def newproject(request, u_id):
@@ -339,15 +478,15 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                u2 = UserProfile.objects.get(user=user)
-                return render_to_response('home.html', {'user':user, 'user2':u2}, context)
+                u2 = UserProfile.objects.filter(user=user)
+                return render_to_response('index.html', {'user':user, 'user2':u2}, context)
             else:
                 return HttpResponse("Your financeweb account is disabled.")
         else:
             print "Invalid login details: {0}, {1}".format(username, password)
             return HttpResponse("Invalid login details supplied.")
     else:
-        return render_to_response('login.html', {}, context)
+        return render_to_response('signin.html', {}, context)
 
 
 @login_required
@@ -362,7 +501,7 @@ def user_logout(request):
     logout(request)
 
     # Take the user back to the homepage.
-    return HttpResponseRedirect('home')
+    return HttpResponseRedirect('index')
 
 def viewallposts(request):
 	if request.POST:

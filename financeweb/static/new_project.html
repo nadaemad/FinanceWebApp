@@ -1,0 +1,209 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Finance Web Application | New Project</title>
+	<link href="/media/css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<!--fonts-->
+		<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>	
+	<!--//fonts-->
+		<link href="/media/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<!-- for-mobile-apps -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="Avalon Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+		Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!-- //for-mobile-apps -->
+	<!-- js -->
+		<script type="text/javascript" src="/media/js/jquery.min.js"></script>
+	<!-- js -->
+	<!-- start-smooth-scrolling -->
+		<script type="text/javascript" src="/media/js/move-top.js"></script>
+		<script type="text/javascript" src="/media/js/easing.js"></script>
+		<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){		
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+				});
+			});
+		</script>
+	<!-- start-smooth-scrolling -->
+
+</head>
+<body>
+<!-- banner -->
+<div class="banner pg-head">
+	<div class="container">
+		<div class="logo head">
+			<a href="index.html"><img src="/media/images/2.jpg" alt=""/></a>
+		</div>
+		<div class="navigation nv-hd">
+				<span class="menu"><img src="/media/images/menu.png" alt=""/></span>
+				<ul class="nav1 nl">
+					<li><a href="about.html">ABOUT</a></li>
+					<li><a href="services.html">SERVICES</a></li>
+					<li><a href="portfolio.html">PORTFOLIO</a></li>
+					<li><a href="blog.html">BLOG</a></li>	
+					<li><a href="user_logout">ACCOUNT</a></li>
+					<li><a href="contact.html">CONTACT</a></li>
+				</ul>
+				<!-- script for menu -->
+					<script> 
+						$( "span.menu" ).click(function() {
+						$( "ul.nav1" ).slideToggle( 300, function() {
+						 // Animation complete.
+						});
+						});
+					</script>
+				<!-- //script for menu -->
+			
+		</div>
+	</div>
+</div>
+<!-- //banner -->
+<!-- 404 -->
+<div class="error-page">
+	<div class="container">
+		<div class="error-info">
+
+			<div class="contact-form">
+			<div class="contact-info">
+				<h2>NEW <span> PROJECT</span></h2>
+			</div>
+			<form method='post' action="{% url 'allprojects' user.id %}">{% csrf_token %}
+				<div class="contact-left">
+				<p>Please fill in the blanks. Kindly be noted that your net profit will
+				be calculated automatically upon your submission.</p>
+
+					<input type="text" name="project_name" placeholder="Project Name" required>
+					<input type="date" name="profit_date" placeholder="Net Profit Date" required>
+					<br></br>
+
+
+					<button type='button' id="b1" onclick="myFunction1()">Click here to add your revenues</button><br>
+					<div id="revenues"></div><br>
+
+					<button type='button' id="b1" onclick="myFunction2()">Click here to add your expenses</button><br>
+					<div id="expenses"></div><br>
+
+				</div>
+				<div class="clearfix"></div>
+				<input type="submit" value="SUBMIT">
+			</form>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+<script>
+	var i = 0;
+	i.name = "revenues_counter";
+
+	function myFunction1() {
+
+		var label1 = document.createElement("label");
+		var ltext1 = document.createTextNode("Revenue Name:");
+		label1.appendChild(ltext1);
+
+		var textbox1 = document.createElement("input");
+		textbox1.name = "revenue_name["+(i)+"]";
+
+		var label2 = document.createElement("label");
+		var ltext2 = document.createTextNode("Amount:");
+		label2.appendChild(ltext2);
+
+		var textbox2 = document.createElement("input");
+		textbox2.name = "revenue_amount["+(i)+"]";
+
+		var label3 = document.createElement("label");
+		var ltext3 = document.createTextNode("Date:");
+		label3.appendChild(ltext3);
+
+		var textbox3 = document.createElement("input");
+		textbox3.name = "revenue_date["+(i)+"]";
+
+		var line = document.createElement("br")
+
+		var element = document.getElementById("revenues");
+
+		i++;
+
+		element.appendChild(label1);
+		element.appendChild(textbox1);
+		element.appendChild(label2);
+		element.appendChild(textbox2);
+		element.appendChild(label3);
+		element.appendChild(textbox3);
+		element.appendChild(line);
+		
+		
+	}
+
+	var y = 0;
+
+	function myFunction2() {
+
+		var label1 = document.createElement("label");
+		var ltext1 = document.createTextNode("Expense Name:");
+		label1.appendChild(ltext1);
+
+		var textbox1 = document.createElement("input");
+		textbox1.name = "ename["+(y)+"]";
+
+		var label2 = document.createElement("label");
+		var ltext2 = document.createTextNode("Amount:");
+		label2.appendChild(ltext2);
+
+		var textbox2 = document.createElement("input");
+		textbox2.name = "eamount["+(y)+"]";
+
+		var label3 = document.createElement("label");
+		var ltext3 = document.createTextNode("Date:");
+		label3.appendChild(ltext3);
+
+		var textbox3 = document.createElement("input");
+		textbox3.name = "expense_date["+(y)+"]";
+
+		var line = document.createElement("br")
+
+		var element = document.getElementById("expenses");
+
+		y++;
+
+		element.appendChild(label1);
+		element.appendChild(textbox1);
+		element.appendChild(label2);
+		element.appendChild(textbox2);
+		element.appendChild(label3);
+		element.appendChild(textbox3);
+		element.appendChild(line);	
+
+	}
+
+	</script>
+
+
+
+<!-- //404 -->
+<!-- footer -->
+<div class="footer">
+	<div class="container">
+		<p>Copyright &copy; 2015 Finance Web Application.</a></p>
+	</div>
+</div>
+<!-- //footer -->
+</body>
+</html>
