@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from financeweb.views import *
+from financeweb.views import deleteRevenues
 
 urlpatterns = patterns('',
     # Examples:
@@ -30,6 +31,9 @@ urlpatterns = patterns('',
 
     url(r'^notauser$', notauser, name='notauser'),
     url(r'^myprojects/deleteproject/(?P<p_id>\d+)/(?P<u_id>\d+)$', deleteproject, name='deleteproject'),
+    url(r'^myprojects/deleteexpenses/(?P<e_id>\d+)$', deleteexpenses, name='deleteexpenses'),
+    url(r'^myprojects/deleteRevenues/(?P<r_id>\d+)$', deleteRevenues, name='deleteRevenues'),
+
 
     url(r'^resetpassword/passwordsent/$', 'django.contrib.auth.views.password_reset_done'),
     url(r'^resetpassword/$', 'financeweb.views.reset', name='reset'),

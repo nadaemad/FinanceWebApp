@@ -476,6 +476,41 @@ def viewrevenues(request, project_id):
 
 
 
+def deleteExpense(request, e_id):
+
+	e=Expense.objects.get(id=e_id)
+
+	if request.POST:
+
+		Expense = Expense.objects.get(id=e_id)
+		Expense.delete()
+
+		return 
+		render_to_response('viewexpense.html', {'Expense':Expense}, context_instance = RequestContext(request)
+
+
+
+
+
+
+
+
+def deleteRevenues(request, r_id):
+
+	r=Revenue.objects.get(id=r_id)
+
+	if request.POST:
+
+		Revenue = Revenue.objects.get(id=r_id)
+		Revenue.delete()
+
+		return render_to_response('viewrevenues.html',{'Revenue':Revenue}, context_instance = RequestContext(request)
+
+
+
+
+
+
 
 
 

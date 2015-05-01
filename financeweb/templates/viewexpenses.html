@@ -4,6 +4,7 @@
 	<title>Project {{ project.pname }}</title>
 
 	<h3>Expenses</h3>
+	
 
 	{% for x in expenses%}
 		<label>Expense Name: {{ x.ename }} </label> 
@@ -11,7 +12,10 @@
 		<label>Expense Amount: ${{ x.eamount }} </label> 
 		<br>
 		<label>Expense Date: {{ x.expense_date }} </label> 
+		<form method='post' action="{% url 'deleteproject' p.id u.id %}">{% csrf_token %}
+		<input type='submit' class="submit" value="Delete">
 		<br></br>
+		
 	{% endfor %}
 
 

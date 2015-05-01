@@ -6,12 +6,15 @@
 	<h3>Revenues</h3>
 
 	{% for r in revenues%}
+
 		<label>Revenue Name: {{ r.revenue_name }} </label> 
 		<br>
 		<label>Revenue Amount: ${{ r.revenue_amount }} </label> 
 		<br>
 		<label>Revenue Date: {{ r.revenue_date }} </label> 
 		<br></br>
+		<form method='post' action="{% url 'deleteproject' p.id u.id %}">{% csrf_token %}
+		<input type='submit' class="submit" value="Delete">
 	{% endfor %}
 
 
