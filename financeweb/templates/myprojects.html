@@ -71,7 +71,31 @@
     <a class="newproject" href="{% url 'newproject' u.id %}">+ Create a new project</a></p>
     <hr>
 
+    	<form method='post' action="{% url 'search_entries' u.id %}">{% csrf_token %}
+    	<p>You can search for entries by name, amount or date.</p>
+		<input type='text' name="search_value">
+		<select id="item1">
+		<option >Select Entry Attribute</option>
+  		<option >Name</option>
+  		<option >Amount</option>
+  		<option >Date</option>
+		</select>
 
+		<select id="item2">
+		<option >Select Entry Type</option>
+  		<option >Revenue</option>
+  		<option >Expense</option>
+		</select>
+		<input type='submit' value="Search for Entry">
+		</form>
+
+		<script>
+		var selected_attribute = document.getElementById("item1").value;
+		selected_attribute.name = item_selected;
+
+		var selected_type  = document.getElementById("item2").value;
+		selected_type.name = type_selected;
+		</script>
 
 </body>
 

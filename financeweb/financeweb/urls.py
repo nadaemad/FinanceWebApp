@@ -49,5 +49,7 @@ urlpatterns = patterns('',
     url(r'^viewrevenues/(?P<project_id>\d+)$', viewrevenues, name="viewrevenues"),
     url(r'^viewgrossprofit/(?P<project_id>\d+)$', viewgrossprofit, name="viewgrossprofit"),
     url(r'^overview_project/(?P<project_id>\d+)$', overview_project, name="overview_project"),
+    url(r'^search_entries/(?P<u_id>\d+)$', search_entries, name='search_entries'),
+
     
 )

@@ -66,7 +66,7 @@ def home(request):
 
 def newproject(request, u_id):
 	u = User.objects.get(id=u_id)
-	u2 = UserProfile.objects.get(user=u)
+	u2 = UserProfile.objects.filter(user=u)
 	return render_to_response('newproject.html', {'u': u, 'u2': u2}, context_instance=RequestContext(request))
 
 
@@ -192,9 +192,85 @@ def updateproject(request, post_id):
 		return render_to_response('updateproject.html', {'p':p, 'profit':profit, 'e':exp, 'revenues':revenues}, context_instance=RequestContext(request))
 
 
+def search_entries(request, u_id):
+	u = User.objects.get(id=u_id)
+	u2 = UserProfile.objects.filter(user=u)
+	myprojects = Projects.objects.filter(client=u2)
+
+	revenues_names = []
+	revenues_amounts = []
+	revenues_dates = []
+	expenses_names = []
+	expenses_amounts = []
+	expenses_dates = []
+
+
+	if request.POST:
+		search_value = request.POST['search_value']
+		item_selected = request.POST['item_selected']
+		type_selected = request.POST['type_selected']
+
+		if type_selected == "Revenue":
+				counter = 1
+
+				while(counter <= myprojects.objects.count()):
+
+					project = myprojects.objects.get(pk=counter)
+		
+					for r in project.revenues:
+						if item_selected == "Name":
+							if search_value == r.revenue_name:
+								revenues_names.append(r.revenue_name)
+								revenues_amounts.append(r.revenue_amount)
+								revenues_dates.append(r.revenue_date)
+						if item_selected == "Amount":
+							if search_value == r.revenue_amount:
+								revenues_names.append(r.revenue_name)
+								revenues_amounts.append(r.revenue_amount)
+								revenues_dates.append(r.revenue_date)
+						if item_selected == "Date":
+							if search_value == r.revenue_date:
+								revenues_names.append(r.revenue_name)
+								revenues_amounts.append(r.revenue_amount)
+								revenues_dates.append(r.revenue_date)
+
+				return render_to_response('search_entries.html', {'myprojects':myprojects, 'user':u, 'u2':u2, 'revenues_names':revenues_names, 'revenues_amounts':revenues_amounts, 'revenues_dates':revenues_dates}, context_instance=RequestContext(request))
+
+
+		if type_selected == "Expense":
+				counter1 = 1
+
+				while(counter1 <= myprojects.objects.count()):
+
+					project1 = myprojects.objects.get(pk=counter1)
+
+					for e in project.expenses:
+						if item_selected == "Name":
+							if search_value == e.expense_name:
+								expenses_names.append(e.expense_name)
+								expenses_amounts.append(e.expense_amount)
+								expenses_dates.append(e.expense_date) 
+							if item_selected == "Amount":
+								if search_value == e.expense_amount:
+									expenses_names.append(e.expense_name)
+									expenses_amounts.append(e.expense_amount)
+									expenses_dates.append(e.expense_date) 
+							if item_selected == "Date":
+								if search_value == e.expense_date:
+									expenses_names.append(e.expense_name)
+									expenses_amounts.append(e.expense_amount)
+									expenses_dates.append(e.expense_date)
+
+				return render_to_response('search_entries.html',{'myprojects': myprojects, 'user':u, 'u2':u2, 'expenses_names': expense_names, 'expenses_amounts': expenses_amounts, 'expenses_dates': expenses_dates}, context_instance=RequestContext(request))
+
+
+	return render_to_response('search_entries.html', {'myprojects':myprojects, 'user':u, 'u2':u2}, context_instance=RequestContext(request))
+
+
+
 def myprojects(request, u_id):
 	u = User.objects.get(id=u_id)
-	u2 = UserProfile.objects.get(user=u)
+	u2 = UserProfile.objects.filter(user=u)
 
 	if request.POST:
 		project_name = request.POST['project_name']
@@ -474,6 +550,8 @@ def viewrevenues(request, project_id):
 	return render_to_response('viewrevenues.html', {'project':project, 'revenues':revenues}, context_instance=RequestContext(request))
 
 
+def getrevenues (request):
+	return Revenue.objects.all()
 
 
 
