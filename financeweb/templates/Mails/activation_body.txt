@@ -1,0 +1,9 @@
+Dear {{ user.first_name }},
+
+Your account has been created for the site Finance Web App, and is
+available at www.financewebapp.com.
+
+See you there soon!
+
+Best Regards,
+The awesome Structured-Chaos team

@@ -40,11 +40,19 @@ ALLOWED_HOSTS = []
 
 LOGIN_URL = 'login'
 
+SITE_NAME = 'FinanceWebApp'
+
+SITE_URL = 'www.FinanceWebApp.com'
+
 ADMINS = (
     'Nada Emad', 'nada.emad8@gmail.com')
 
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 MANAGERS = ADMINS
+
+#    'notifier.backends.EmailBackend',
+ #   'path.to.custom.backend.CustomBackend',
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -55,6 +63,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app1',
+    'mail_factory',
+    'notifier',
 )
 
 MIDDLEWARE_CLASSES = (

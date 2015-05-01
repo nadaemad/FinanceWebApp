@@ -14,7 +14,6 @@ from django.contrib.auth.views import password_reset, password_reset_confirm
 from datetime import datetime
 import calendar
 
-
 def reset(request):
 	return password_reset(request, template_name='reset.html', email_template_name='reset_email.html', 
 		subject_template_name='reset_subject.txt', post_reset_redirect= reverse('success'))
@@ -215,7 +214,7 @@ def myprojects(request, u_id):
 		revenue_dates = []
 		done1 = False
 		a=0
-		while(not done):
+		while(not done1):
 			try:
 				revenue_names.append(request.POST['revenue_name[%d]'%a])
 				revenue_amounts.append(request.POST['revenue_amount[%d]'%a])
@@ -313,6 +312,7 @@ def register(request):
             send_mail(subject, message, from_email, to_list, fail_silently=True)
 
             messages.success(request, 'Thank you for registering, you will receive an email shortly')
+
         else:
             print user_form.errors, profile_form.errors
     # Not a HTTP POST, so we render our form using two ModelForm instances.
