@@ -53,5 +53,6 @@ urlpatterns = patterns('',
     url(r'^viewrevenues/(?P<project_id>\d+)$', viewrevenues, name="viewrevenues"),
     url(r'^viewgrossprofit/(?P<project_id>\d+)$', viewgrossprofit, name="viewgrossprofit"),
     url(r'^overview_project/(?P<project_id>\d+)$', overview_project, name="overview_project"),
-    
+    url(r'^expenses_chart/(?P<p_id>\d+)$', expenses_chart, name='viewproject'),
+
 )

@@ -474,6 +474,36 @@ def viewrevenues(request, project_id):
 	return render_to_response('viewrevenues.html', {'project':project, 'revenues':revenues}, context_instance=RequestContext(request))
 
 
+def expenses_chart (request, p_id):
+	project = Project.objects.get(id=project_id)
+	if request.POST:
+	     expensedata = DataPool(
+	        series =
+	       	[{'options': {
+	       	'source': Expense.objects.all()}
+	       	'terms': [
+	       	'eamount',
+	       	'expense_date']}
+	       	])
+
+	cht = Chart(
+		datasource = expensedata,
+		series_options =
+		[{ 'options': {
+		    'type': 'line'
+		    'stacking':False},
+		    'terms':{
+		    'eamount',
+		    'expense_date'
+		    }}],
+		    chart_options = 
+		    {'title': {
+		    'text': 'current expenses'
+		    'xAxix':{
+		    'title':{
+		    'text': 'time'
+		    }}})
+	return render_to_response('graph.html',{'expensechart':cht, 'p':project},context_instance=RequestContext(request))
 
 
 

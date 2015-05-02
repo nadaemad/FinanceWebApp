@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="/static/js/highcharts.js"></script>
+    <script src ="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+    <script type ="text/javascript" src ="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    {% load chartit %}
+    {{ expensechart|load_charts:"container"}}
+
+</head>
+<body>
+<div id="container">{{expensechart| load_charts:"container"}} </div>
+</body>
+</html>

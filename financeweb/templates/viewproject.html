@@ -61,7 +61,7 @@
 		<li><a href="{% url 'viewrevenues' p.id %}">Revenues</a></li>
 		<li><a href="{% url 'viewexpenses' p.id %}">Expenses</a></li>
 		<li><a href="#">Milestones</a></li>	
-		<li><a href="#">Statistics</a></li>
+		<li><a href="{% url 'expenses_chart' p.id%}">Statistics</a></li>
 		<li><a href="{% url 'updateproject' p.id %}">Update</a></li>
 	</ul>
 
