@@ -1,7 +1,24 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from datetime import datetime
 # Create your models here.
+
+class LastSeen(object):
+
+    def process_request(self, request):
+        user = request.user
+        if not user.is_authenticated(): return None  
+        up = user.get_profile()
+        up.last_seen_on = datetime.now()
+        up.last_activity_ip = request.META['REMOTE_ADDR']
+        up.save()
+        return None
+
+class Notification(models.Model):
+	ntitle = models.CharField(max_length=50)
+	nmessage = models.CharField(max_length=200)
+	def __unicode__(self):
+		return unicode(self.ntitle)
 
 class Expense(models.Model):
 	ename = models.CharField(max_length=50)
@@ -48,7 +65,7 @@ class Project(models.Model):
 		return unicode(self.pname)
 
 
-class Post (models.Model):
+class Post(models.Model):
 	text = models.CharField(max_length=500)
 	title= models.CharField(max_length=100)
 	def __unicode__(self):

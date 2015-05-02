@@ -11,6 +11,7 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'email', 'password', 'first_name', 'last_name')
 
 class UserProfileForm(forms.ModelForm):
+	
     class Meta:
         model = UserProfile
         fields = ('companyname',)

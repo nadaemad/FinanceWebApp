@@ -1,0 +1,6 @@
+Dear {{ user.first_name }},
+
+Your values have changed significantly. Please do give them a look.
+
+Best Regards,
+The awesome Structured-Chaos team
