@@ -66,20 +66,20 @@ class comment(models.Model):
 
 
 
-midnight = datetime.time(0,0,0)
+	midnight = datetime.time(0,0,0)
 
-class reminder(models.Model):
-    person = models.ForeignKey(User)
-    title = models.CharField(max_length=1000)
-    description = models.TextField(null=True, blank=True)
-    date_created = models.DateTimeField(null=True, blank=True)
-    date_to_remind = models.DateField(null=True, blank=True)
-    time_to_remind = models.TimeField(null=True, blank=True, default=midnight)
-    active = models.BooleanField(default=True)
-    def __unicode__(self):
-        return self.title
+	class reminder(models.Model):
+	    person = models.ForeignKey(User)
+	    title = models.CharField(max_length=1000)
+	    description = models.TextField(null=True, blank=True)
+	    date_created = models.DateTimeField(null=True, blank=True)
+	    date_to_remind = models.DateField(null=True, blank=True)
+	    time_to_remind = models.TimeField(null=True, blank=True, default=midnight)
+	    active = models.BooleanField(default=True)
+	    def __unicode__(self):
+	        return self.title
 
-def create_notice_type(label, display, description, **kwargs):
-    NoticeType.create(label, display, description, **kwargs)
+
+
 
 
